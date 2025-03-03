@@ -1,0 +1,19 @@
+create proc sp_EliminarCategoria(
+@IdCategoria int,
+@Mensaje varchar(500) output,
+@Resultado bit output
+)
+as
+begin
+	set @Resultado = 0
+	if not exists(select * from PRODUCTO p
+	inner join CATEGORIA c on c.Id = p.IdCategoria where p.IdCategoria = @IdCategoria)
+	begin
+		delete top(1) from CATEGORIA
+		where Id = @IdCategoria
+
+		set @Resultado = 1
+	end
+	else
+		set @Mensaje = 'La categoría se encuentra relacionada a un producto'
+end

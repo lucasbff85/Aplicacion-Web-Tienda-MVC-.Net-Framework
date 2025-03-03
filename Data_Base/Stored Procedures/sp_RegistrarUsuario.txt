@@ -1,0 +1,23 @@
+create proc sp_RegistrarUsuario(
+@Nombre varchar(50),
+@Apellido varchar(50),
+@Correo varchar(100),
+@Clave varchar(150),
+@Activo bit,
+@IsAdmin bit,
+@Mensaje varchar(500) output,
+@Resultado int output
+)
+as
+begin
+	set @Resultado = 0
+	if not exists (select * from USUARIO where Correo = @Correo)
+	begin
+		insert into USUARIO(Nombre,Apellido,Correo,Clave,Activo,IsAdmin) values
+		(@Nombre,@Apellido,@Correo,@Activo,@Clave,@IsAdmin)
+		
+		set @Resultado = SCOPE_IDENTITY()
+	end
+	else
+		set @Mensaje = 'El correo del usuario ya existe'
+end

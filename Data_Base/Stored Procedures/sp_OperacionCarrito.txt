@@ -1,0 +1,48 @@
+create proc sp_OperacionCarrito(
+@IdUsuario int,
+@IdProducto int,
+@Sumar bit,
+@Mensaje varchar(500) output,
+@Resultado bit output
+)
+as
+begin
+	set @Resultado = 1
+	set @Mensaje = ''
+
+	declare @existeCarrito bit = iif(exists(select * from CARRITO where IdUsuario = @IdUsuario and IdProducto = @IdProducto),1,0)
+
+	declare @stockProducto int = (select Stock from PRODUCTO where Id = @IdProducto)
+
+	BEGIN TRY
+		BEGIN TRANSACTION OPERACION
+			if(@Sumar = 1)
+			begin
+				if(@stockProducto > 0)
+				begin
+					if(@existeCarrito = 1)
+						update CARRITO set Cantidad = Cantidad+1 where IdUsuario = @IdUsuario and IdProducto = @IdProducto
+					else
+						insert into CARRITO (IdUsuario,IdProducto,Cantidad) values (@IdUsuario,@IdProducto,1)
+
+					update PRODUCTO set Stock = Stock-1 where Id = @IdProducto
+				end
+				else
+				begin
+					set @Resultado = 0
+					set @Mensaje = 'El producto no cuenta con stock disponible.'
+				end
+			end
+			else
+			begin
+				update CARRITO set Cantidad = Cantidad-1 where IdUsuario = @IdUsuario and IdProducto = @IdProducto
+				update PRODUCTO set Stock = Stock+1 where Id = @IdProducto
+			end
+		COMMIT TRANSACTION OPERACION
+	END TRY
+	BEGIN CATCH
+		set @Resultado = 0
+		set @Mensaje = ERROR_MESSAGE()
+		ROLLBACK TRANSACTION OPERACION
+	END CATCH
+end

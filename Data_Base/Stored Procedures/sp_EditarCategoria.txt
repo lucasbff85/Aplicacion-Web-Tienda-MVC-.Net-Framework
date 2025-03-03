@@ -1,0 +1,22 @@
+create proc sp_EditarCategoria(
+@IdCategoria int,
+@Descripcion varchar(50),
+@Activo bit,
+@Mensaje varchar(500) output,
+@Resultado int output
+)
+as
+begin
+	set @Resultado = 0
+	if not exists(select * from CATEGORIA where Descripcion = @Descripcion and Id != @IdCategoria)
+	begin
+		update top(1) CATEGORIA set
+		Descripcion = @Descripcion,
+		Activo = @Activo
+		where Id = @IdCategoria
+
+		set @Resultado = 1
+	end
+	else
+		set @Mensaje = 'La categoría ya existe'
+end

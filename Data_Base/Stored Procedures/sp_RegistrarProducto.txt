@@ -1,0 +1,25 @@
+create proc sp_RegistrarProducto(
+@Nombre varchar(50),
+@Descripcion varchar(100),
+@IdMarca int,
+@IdCategoria int,
+@Precio decimal(10,2),
+@Stock int,
+@Activo bit,
+@PrecioTexto varchar(20),
+@Mensaje varchar(500) output,
+@Resultado int output
+)
+as
+begin
+	set @Resultado = 0
+	if not exists(select * from PRODUCTO where Nombre = @Nombre)
+	begin
+		insert into PRODUCTO (Nombre,Descripcion,IdMarca,IdCategoria,Precio,PrecioTexto,Stock,Activo)
+		values(@Nombre,@Descripcion,@IdMarca,@IdCategoria,@Precio,@PrecioTexto,@Stock,@Activo)
+
+		set @Resultado = SCOPE_IDENTITY()
+	end
+	else
+		set @Mensaje = 'El producto ya existe'
+end

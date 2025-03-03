@@ -1,0 +1,11 @@
+create function fn_obtenerCarritoUsuario(
+@IdUsuario int
+)
+returns table
+as
+return(
+	select p.Id, m.Descripcion [DesMarca],p.Nombre,p.Precio,c.Cantidad,p.RutaImagen,p.NombreImagen from CARRITO c
+	inner join PRODUCTO p on p.Id = c.IdProducto
+	inner join MARCA m  on m.Id = p.IdMarca
+	where c.IdUsuario = @IdUsuario
+)

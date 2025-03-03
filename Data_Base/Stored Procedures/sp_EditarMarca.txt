@@ -1,0 +1,22 @@
+create proc sp_EditarMarca(
+@IdMarca int,
+@Descripcion varchar(50),
+@Activo bit,
+@Mensaje varchar(500) output,
+@Resultado int output
+)
+as
+begin
+	set @Resultado = 0
+	if not exists(select * from MARCA where Descripcion = @Descripcion and Id != @IdMarca)
+	begin
+		update top(1) MARCA set
+		Descripcion = @Descripcion,
+		Activo = @Activo
+		where Id = @IdMarca
+
+		set @Resultado = 1
+	end
+	else
+		set @Mensaje = 'La marca ya existe'
+end

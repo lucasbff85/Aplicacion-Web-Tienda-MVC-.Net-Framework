@@ -1,0 +1,2 @@
+D:\PROGRAMACION\.NET\TECHNO_THINGS_LB\TECHNO_THINGS\CapaPresentacion\obj\Debug\CapaPresentacion.csproj.AssemblyReference.cache
+D:\PROGRAMACION\.NET\TECHNO_THINGS_LB\TECHNO_THINGS\CapaPresentacion\obj\Debug\CapaPresentacion.csproj.CoreCompileInputs.cache

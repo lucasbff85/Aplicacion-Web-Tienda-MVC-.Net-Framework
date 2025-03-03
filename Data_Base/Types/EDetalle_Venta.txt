@@ -1,0 +1,5 @@
+create type [dbo].[EDetalle_Venta] as table(
+[IdProducto] int null,
+[Cantidad] int null,
+[Total] decimal(18,2) null
+)

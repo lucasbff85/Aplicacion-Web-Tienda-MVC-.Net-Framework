@@ -1,0 +1,12 @@
+create proc sp_ExisteCarrito(
+@IdUsuario int,
+@IdProducto int,
+@Resultado bit output
+)
+as
+begin
+	if exists(select * from CARRITO where IdUsuario = @IdUsuario and IdProducto = @IdProducto)
+		set @Resultado = 1
+	else
+		set @Resultado = 0
+end

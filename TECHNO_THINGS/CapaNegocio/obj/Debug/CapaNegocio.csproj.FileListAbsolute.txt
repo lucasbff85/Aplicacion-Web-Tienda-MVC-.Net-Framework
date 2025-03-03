@@ -1,0 +1,13 @@
+D:\PROGRAMACION\.NET\TECHNO_THINGS_LB\TECHNO_THINGS\CapaNegocio\bin\Debug\CapaNegocio.dll
+D:\PROGRAMACION\.NET\TECHNO_THINGS_LB\TECHNO_THINGS\CapaNegocio\bin\Debug\CapaNegocio.pdb
+D:\PROGRAMACION\.NET\TECHNO_THINGS_LB\TECHNO_THINGS\CapaNegocio\bin\Debug\CapaDatos.dll
+D:\PROGRAMACION\.NET\TECHNO_THINGS_LB\TECHNO_THINGS\CapaNegocio\bin\Debug\CapaEntidad.dll
+D:\PROGRAMACION\.NET\TECHNO_THINGS_LB\TECHNO_THINGS\CapaNegocio\bin\Debug\Newtonsoft.Json.dll
+D:\PROGRAMACION\.NET\TECHNO_THINGS_LB\TECHNO_THINGS\CapaNegocio\bin\Debug\CapaDatos.pdb
+D:\PROGRAMACION\.NET\TECHNO_THINGS_LB\TECHNO_THINGS\CapaNegocio\bin\Debug\CapaEntidad.pdb
+D:\PROGRAMACION\.NET\TECHNO_THINGS_LB\TECHNO_THINGS\CapaNegocio\bin\Debug\Newtonsoft.Json.xml
+D:\PROGRAMACION\.NET\TECHNO_THINGS_LB\TECHNO_THINGS\CapaNegocio\obj\Debug\CapaNegocio.csproj.AssemblyReference.cache
+D:\PROGRAMACION\.NET\TECHNO_THINGS_LB\TECHNO_THINGS\CapaNegocio\obj\Debug\CapaNegocio.csproj.CoreCompileInputs.cache
+D:\PROGRAMACION\.NET\TECHNO_THINGS_LB\TECHNO_THINGS\CapaNegocio\obj\Debug\CapaNego.81B9D119.Up2Date
+D:\PROGRAMACION\.NET\TECHNO_THINGS_LB\TECHNO_THINGS\CapaNegocio\obj\Debug\CapaNegocio.dll
+D:\PROGRAMACION\.NET\TECHNO_THINGS_LB\TECHNO_THINGS\CapaNegocio\obj\Debug\CapaNegocio.pdb

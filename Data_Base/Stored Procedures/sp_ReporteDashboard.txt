@@ -1,0 +1,8 @@
+create proc sp_ReporteDashboard
+as
+begin
+	select
+	(select count(*) from USUARIO where IsAdmin = 0)[TotalCliente],
+	(select ISNULL(sum(Cantidad),0) from DETALLE_VENTA)[TotalVenta],
+	(select count(*) from PRODUCTO)[TotalProducto]
+end

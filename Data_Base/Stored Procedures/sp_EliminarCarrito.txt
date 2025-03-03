@@ -1,0 +1,24 @@
+create proc sp_EliminarCarrito(
+@IdUsuario int,
+@IdProducto int,
+@Resultado bit output
+)
+as
+begin
+	set @Resultado = 1
+	declare @cantidadProducto int = (select Cantidad from CARRITO where IdUsuario = @IdUsuario  and IdProducto = @IdProducto)
+
+	BEGIN TRY
+		BEGIN TRANSACTION OPERACION
+
+		update PRODUCTO set Stock = Stock+@cantidadProducto where Id = @IdProducto
+
+		delete top(1) from CARRITO where IdUsuario = @IdUsuario and IdProducto = @IdProducto
+
+		COMMIT TRANSACTION OPERACION
+	END TRY
+	BEGIN CATCH
+		set @Resultado = 0
+		ROLLBACK TRANSACTION OPERACION
+	END CATCH
+end

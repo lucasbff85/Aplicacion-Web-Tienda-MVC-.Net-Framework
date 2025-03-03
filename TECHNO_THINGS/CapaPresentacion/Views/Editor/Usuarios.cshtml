@@ -1,0 +1,366 @@
+﻿
+@{
+    ViewBag.Title = "Usuarios";
+    Layout = "~/Views/Shared/VistaAdministrador.cshtml";
+}
+
+<ol class="breadcrumb mb-4 mt-4">
+    <li class="breadcrumb-item"><a href="index.html">Resumen</a></li>
+    <li class="breadcrumb-item active">Usuarios</li>
+</ol>
+
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-users me-1"></i> Lista de Usuarios
+        <!-- para poner icono de usuarios -->
+
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12">
+                <button type="button" class="btn btn-success" onclick="abrirModal(null)">Crear Administrador</button>
+            </div>
+        </div>
+
+        <hr />
+        <h3>Tabla Admin</h3>
+        <br />
+        <table id="tablaAdmin" class="display cell-border mb-3" style="width: 100%">
+            <thead>
+                <tr>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>Correo</th>
+                    <th>Activo</th>
+                    <th></th>
+
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+        <h3 class="mt-xl-3">Tabla Clientes</h3>
+        <br />
+        <table id="tablaClientes" class="display cell-border" style="width: 100%">
+            <thead>
+                <tr>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>Correo</th>
+                    <th>Activo</th>
+                    <th></th>
+
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+
+    </div>
+</div>
+
+
+<!-- Modal------data-bs-backdrow=static para que no se cierre si toco afuera -->
+<div class="modal fade" id="FormModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title" id="exampleModalLabel">Usuario</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <input id="txtid" type="hidden" value="0" />
+
+
+                <div class="row g-2">
+
+                    <div class="col-sm-6">
+                        <label for="txtnombres" class="form-label">Nombres</label>
+                        <input type="text" class="form-control" id="txtnombres" autocomplete="off">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label for="txtapellidos" class="form-label">Apellidos</label>
+                        <input type="text" class="form-control" id="txtapellidos" autocomplete="off">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label for="txtcorreo" class="form-label">Correo</label>
+                        <input type="text" class="form-control" id="txtcorreo" autocomplete="off"> @*podemos dejarlo como text o email*@
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label for="cboactivo" class="form-label">Activo</label>
+                        <select id="cboactivo" class="form-select">
+                            <option value="1">Si</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <div id="mensajeError" class="alert alert-danger" role="alert">
+                            This is a danger alert—check it out!
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="Guardar()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts{  <!-- esto lo va pasar a la master page-->
+    <script>
+
+        var tabladata;
+        var filaSeleccionada;
+
+
+            tabladata = $("#tablaAdmin").DataTable({    //convierte la tabla en un dataTable
+                responsive: true,
+                ordering: false,
+                "ajax": {
+                    url: '@Url.Action("ListarAdmin", "Editor")',  //para no tener que poner toda la direccion
+                    type: "GET",
+                    dataType: "json"
+                },
+                "columns": [
+                    { "data": "Nombre" },
+                    { "data": "Apellido" },  //data es el Json que retorna en HomeController
+                    { "data": "Correo" },
+                    {
+                        "data": "Activo", "render": function (valor) {
+                            if (valor) {
+                                return '<span class="badge bg-success">Si</span>'
+                            } else {
+                                return '<span class="badge bg-danger">No</span>'
+                            }
+                        }
+                    },
+                    {
+                        "defaultContent": '<button type="button" class="btn btn-primary btn-sm btn-editar"> <i class="fas fa-pen me-1"></i></button>' +
+                            '<button type="button" class="btn btn-danger btn-sm ms-2 btn-eliminar"> <i class="fas fa-trash me-1"></i></button>',
+                        "orderable": false,  //que esa columna no sea ordenada de mayor a menor porque solo contiene botones
+                        "searchable": false, //que no se involucre en los filtros
+                        "width": "90px"
+                    }
+
+                ],
+                "language": {
+                    "url":"https://cdn.datatables.net/plug-ins/2.1.8/i18n/es-ES.json"
+                }
+            });
+
+
+            tabladata = $("#tablaClientes").DataTable({    //convierte la tabla en un dataTable
+                responsive: true,
+                ordering: false,
+                "ajax": {
+                    url: '@Url.Action("ListarClientes", "Editor")',  //para no tener que poner toda la direccion
+                    type: "GET",
+                    dataType: "json"
+                },
+                "columns": [
+                    { "data": "Nombre" },
+                    { "data": "Apellido" },  //data es el Json que retorna en HomeController
+                    { "data": "Correo" },
+                    {
+                        "data": "Activo", "render": function (valor) {
+                            if (valor) {
+                                return '<span class="badge bg-success">Si</span>'
+                            } else {
+                                return '<span class="badge bg-danger">No</span>'
+                            }
+                        }
+                    },
+                    {
+                        "defaultContent": '<button type="button" class="btn btn-primary btn-sm btn-editar"> <i class="fas fa-pen me-1"></i></button>' +
+                            '<button type="button" class="btn btn-danger btn-sm ms-2 btn-eliminar"> <i class="fas fa-trash me-1"></i></button>',
+                        "orderable": false,  //que esa columna no sea ordenada de mayor a menor porque solo contiene botones
+                        "searchable": false, //que no se involucre en los filtros
+                        "width": "90px"
+                    }
+
+                ],
+                "language": {
+                    "url":"https://cdn.datatables.net/plug-ins/2.1.8/i18n/es-ES.json"
+                }
+            });
+
+        function abrirModal(json) {   //recibe objeto formato json, tambien puede ir otro nombre como data
+
+            //limpiar datos
+            $("#txtid").val(0);
+            $("#txtnombres").val("");
+            $("#txtapellidos").val("");
+            $("#txtcorreo").val("");
+            $("#cboactivo").val(1);
+            $("#mensajeError").hide();
+
+
+            if (json != null) {
+                $("#txtid").val(json.IdUsuario);
+                $("#txtnombres").val(json.Nombre);
+                $("#txtapellidos").val(json.Apellido);
+                $("#txtcorreo").val(json.Correo);
+                $("#cboactivo").val(json.Activo == true ? 1 : 0);
+
+            }
+
+
+
+            $("#FormModal").modal("show");
+        }
+
+        $("#tabla tbody").on("click", '.btn-editar', function () {
+
+
+            //$(this) hace referencia a la tabla misma, que es con la que trabajamos
+            filaSeleccionada = $(this).closest("tr");  //la fila seleccionada con el boton editar
+
+            var data = tabladata.row(filaSeleccionada).data();
+
+            // alert("hola")
+
+            abrirModal(data)
+
+        })
+
+        $("#tabla tbody").on("click", '.btn-eliminar', function () {
+
+            var usuarioSeleccionado = $(this).closest("tr");
+
+            var data = tabladata.row(usuarioSeleccionado).data();
+
+
+            //ver documentacion de sweet alert...
+            swal({
+                title: "Está seguro?",
+                text: "Desea eliminar el usuario?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-primary",
+                confirmButtonText: "Si",
+                cancelButtonText: "No",
+                closeOnConfirm: true
+            },
+            function () {
+               jQuery.ajax({
+                   url: '@Url.Action("EliminarUsuario","Editor")',
+                   type: "POST",
+                   data: JSON.stringify({ id: data.IdUsuario }),
+                   dataType: "json",
+                   contentType: "application/json; charset=utf-8",
+                   success: function (data) {  //este data es distinto, almacena la respuesta de eliminar usuario de HomeController
+
+                       if (data.resultado) {
+
+                           tabladata.row(usuarioSeleccionado).remove().draw();
+                           //tabladata.ajax.reload(null, false); para recargar desde el servidor
+
+                       } else {
+                            swal("No se pudo eliminar", data.mensaje, "error")
+                       }
+
+
+                   },
+                   error: function (error) {
+                       console.log(error)
+                   }
+
+               });
+            });
+
+        });
+
+        function Guardar() {
+            var Usuario = {
+                IdUsuario: $("#txtid").val(),
+                Activo: $("#cboactivo").val() == 1 ? true : false,
+                Apellido: $("#txtapellidos").val(),
+                Correo: $("#txtcorreo").val(),
+                Nombre: $("#txtnombres").val()
+            }
+
+
+            jQuery.ajax({
+                url: '@Url.Action("GuardarUsuario","Editor")',
+                type: "POST",
+                //convierte el valor a texto
+                data: JSON.stringify({ objeto: Usuario }),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                //el ajax tiene estos tres metodos:
+                success: function (data) {   //puede ser data o cualquier nombre y hace referencia a (new { resultado = resultado, mensaje = mensaje }
+
+                    $(".modal-body").LoadingOverlay("hide");
+
+                    //USUARIO NUEVO  (RESULTADO GUARDA UN ENTERO--el id del nuevo usuario registrado)
+                    if (Usuario.IdUsuario == 0) {
+
+                        if (data.resultado != 0) { //NO data.IdUsuario
+                            Usuario.IdUsuario = data.resultado;
+                            tabladata.row.add(Usuario).draw(false);
+                            $("#FormModal").modal("hide");
+                        } else {
+                            $("#mensajeError").text(data.mensaje);
+                            $("#mensajeError").show();
+                        }
+
+
+
+                    } else {
+                        //USUARIO EDITAR
+                        //con editar, data.resultado es un booleano
+                        if (data.resultado) {
+                            tabladata.row(filaSeleccionada).data(Usuario).draw(false);
+                            filaSeleccionada = null;
+                            $("#FormModal").modal("hide");
+                        } else {
+                            $("#mensajeError").text(data.mensaje);
+                            $("#mensajeError").show();
+                        }
+
+
+
+                    }
+                },
+                error: function (error) {
+                    $(".modal-body").LoadingOverlay("hide");
+                    $("#mensajeError").text("Error ajax");
+                    $("#mensajeError").show();
+                },
+                beforeSend: function () {
+                    //mostramos algo mientras se lleva a cabo la operacion
+                    $(".modal-body").LoadingOverlay("show", {
+                        imageResizeFactor: 2,   //tamaño de la img
+                        text: "Cargando...",
+                        size: 14    //tamaño del texto
+                    })
+                },
+            });
+
+        }
+
+    </script>
+}
+

@@ -1,0 +1,826 @@
+USE [master]
+GO
+/****** Object:  Database [TECHNO_THINGS_DB]    Script Date: 23/2/2025 12:05:07 ******/
+CREATE DATABASE [TECHNO_THINGS_DB]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'TECHNO_THINGS_DB', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL16.SQLEXPRESS\MSSQL\DATA\TECHNO_THINGS_DB.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'TECHNO_THINGS_DB_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL16.SQLEXPRESS\MSSQL\DATA\TECHNO_THINGS_DB_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+ WITH CATALOG_COLLATION = DATABASE_DEFAULT, LEDGER = OFF
+GO
+ALTER DATABASE [TECHNO_THINGS_DB] SET COMPATIBILITY_LEVEL = 160
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [TECHNO_THINGS_DB].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [TECHNO_THINGS_DB] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [TECHNO_THINGS_DB] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [TECHNO_THINGS_DB] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [TECHNO_THINGS_DB] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [TECHNO_THINGS_DB] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [TECHNO_THINGS_DB] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [TECHNO_THINGS_DB] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [TECHNO_THINGS_DB] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [TECHNO_THINGS_DB] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [TECHNO_THINGS_DB] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [TECHNO_THINGS_DB] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [TECHNO_THINGS_DB] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [TECHNO_THINGS_DB] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [TECHNO_THINGS_DB] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [TECHNO_THINGS_DB] SET  DISABLE_BROKER 
+GO
+ALTER DATABASE [TECHNO_THINGS_DB] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [TECHNO_THINGS_DB] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [TECHNO_THINGS_DB] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [TECHNO_THINGS_DB] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [TECHNO_THINGS_DB] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [TECHNO_THINGS_DB] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [TECHNO_THINGS_DB] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [TECHNO_THINGS_DB] SET RECOVERY SIMPLE 
+GO
+ALTER DATABASE [TECHNO_THINGS_DB] SET  MULTI_USER 
+GO
+ALTER DATABASE [TECHNO_THINGS_DB] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [TECHNO_THINGS_DB] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [TECHNO_THINGS_DB] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [TECHNO_THINGS_DB] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+ALTER DATABASE [TECHNO_THINGS_DB] SET DELAYED_DURABILITY = DISABLED 
+GO
+ALTER DATABASE [TECHNO_THINGS_DB] SET ACCELERATED_DATABASE_RECOVERY = OFF  
+GO
+ALTER DATABASE [TECHNO_THINGS_DB] SET QUERY_STORE = ON
+GO
+ALTER DATABASE [TECHNO_THINGS_DB] SET QUERY_STORE (OPERATION_MODE = READ_WRITE, CLEANUP_POLICY = (STALE_QUERY_THRESHOLD_DAYS = 30), DATA_FLUSH_INTERVAL_SECONDS = 900, INTERVAL_LENGTH_MINUTES = 60, MAX_STORAGE_SIZE_MB = 1000, QUERY_CAPTURE_MODE = AUTO, SIZE_BASED_CLEANUP_MODE = AUTO, MAX_PLANS_PER_QUERY = 200, WAIT_STATS_CAPTURE_MODE = ON)
+GO
+USE [TECHNO_THINGS_DB]
+GO
+/****** Object:  UserDefinedTableType [dbo].[EDetalle_Venta]    Script Date: 23/2/2025 12:05:07 ******/
+CREATE TYPE [dbo].[EDetalle_Venta] AS TABLE(
+	[IdProducto] [int] NULL,
+	[Cantidad] [int] NULL,
+	[Total] [decimal](18, 2) NULL
+)
+GO
+/****** Object:  Table [dbo].[PRODUCTO]    Script Date: 23/2/2025 12:05:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[PRODUCTO](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Nombre] [varchar](50) NULL,
+	[Descripcion] [varchar](100) NULL,
+	[IdMarca] [int] NULL,
+	[IdCategoria] [int] NULL,
+	[Precio] [decimal](18, 2) NULL,
+	[Stock] [int] NULL,
+	[RutaImagen] [varchar](500) NULL,
+	[NombreImagen] [varchar](100) NULL,
+	[Activo] [bit] NULL,
+ CONSTRAINT [PK_PRODUCTO] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[MARCA]    Script Date: 23/2/2025 12:05:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[MARCA](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Descripcion] [varchar](50) NULL,
+	[Activo] [bit] NULL,
+ CONSTRAINT [PK_MARCA] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[CARRITO]    Script Date: 23/2/2025 12:05:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[CARRITO](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[IdUsuario] [int] NULL,
+	[IdProducto] [int] NULL,
+	[Cantidad] [int] NULL,
+ CONSTRAINT [PK_CARRITO] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  UserDefinedFunction [dbo].[fn_obtenerCarritoUsuario]    Script Date: 23/2/2025 12:05:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create function [dbo].[fn_obtenerCarritoUsuario](
+@IdUsuario int
+)
+returns table
+as
+return(
+	select p.Id, m.Descripcion [DesMarca],p.Nombre,p.Precio,c.Cantidad,p.RutaImagen,p.NombreImagen from CARRITO c
+	inner join PRODUCTO p on p.Id = c.IdProducto
+	inner join MARCA m  on m.Id = p.IdMarca
+	where c.IdUsuario = @IdUsuario
+)
+GO
+/****** Object:  Table [dbo].[VENTA]    Script Date: 23/2/2025 12:05:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[VENTA](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[IdUsuario] [int] NULL,
+	[TotalProducto] [int] NULL,
+	[MontoTotal] [decimal](18, 2) NULL,
+	[Contacto] [varchar](50) NULL,
+	[IdCiudad] [int] NULL,
+	[IdTransaccion] [varchar](100) NULL,
+	[FechaVenta] [datetime] NULL,
+	[Telefono] [varchar](50) NULL,
+	[Direccion] [varchar](100) NULL,
+ CONSTRAINT [PK_VENTA] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[DETALLE_VENTA]    Script Date: 23/2/2025 12:05:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[DETALLE_VENTA](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[IdVenta] [int] NULL,
+	[IdProducto] [int] NULL,
+	[Cantidad] [int] NULL,
+	[Total] [decimal](18, 2) NULL,
+	[Direccion] [varchar](100) NULL,
+	[Telefono] [varchar](50) NULL,
+ CONSTRAINT [PK_Detalle_Venta] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  UserDefinedFunction [dbo].[fn_ListarCompras]    Script Date: 23/2/2025 12:05:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create function [dbo].[fn_ListarCompras](
+@IdUsuario int
+)
+returns table
+as
+return
+(
+	select p.RutaImagen,p.NombreImagen,p.Nombre,p.Precio,dv.Cantidad,dv.Total,v.IdTransaccion from DETALLE_VENTA dv 
+	inner join PRODUCTO p on p.Id = dv.IdProducto
+	inner join VENTA v on v.Id = dv.IdVenta
+	where v.IdUsuario = @IdUsuario
+)
+GO
+/****** Object:  Table [dbo].[CATEGORIA]    Script Date: 23/2/2025 12:05:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[CATEGORIA](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Descripcion] [varchar](50) NULL,
+	[Activo] [bit] NULL,
+ CONSTRAINT [PK_CATEGORIA] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[CIUDAD]    Script Date: 23/2/2025 12:05:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[CIUDAD](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Descripcion] [varchar](50) NULL,
+	[IdProvincia] [int] NULL,
+	[CP] [varchar](10) NULL,
+ CONSTRAINT [PK_CIUDAD] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[PROVINCIA]    Script Date: 23/2/2025 12:05:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[PROVINCIA](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Descripcion] [varchar](20) NULL,
+ CONSTRAINT [PK_PROVINCIA] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[USUARIO]    Script Date: 23/2/2025 12:05:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[USUARIO](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Nombre] [varchar](50) NULL,
+	[Apellido] [varchar](50) NULL,
+	[Correo] [varchar](100) NULL,
+	[Clave] [varchar](150) NULL,
+	[Reestablecer] [bit] NULL,
+	[Activo] [bit] NULL,
+	[FechaRegistro] [datetime] NULL,
+	[IsAdmin] [bit] NULL,
+	[Telefono] [varchar](30) NULL,
+ CONSTRAINT [PK_USUARIO] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[CARRITO]  WITH CHECK ADD  CONSTRAINT [FK_CARRITO_PRODUCTO] FOREIGN KEY([IdProducto])
+REFERENCES [dbo].[PRODUCTO] ([Id])
+GO
+ALTER TABLE [dbo].[CARRITO] CHECK CONSTRAINT [FK_CARRITO_PRODUCTO]
+GO
+ALTER TABLE [dbo].[CARRITO]  WITH CHECK ADD  CONSTRAINT [FK_CARRITO_USUARIO] FOREIGN KEY([IdUsuario])
+REFERENCES [dbo].[USUARIO] ([Id])
+GO
+ALTER TABLE [dbo].[CARRITO] CHECK CONSTRAINT [FK_CARRITO_USUARIO]
+GO
+ALTER TABLE [dbo].[CIUDAD]  WITH CHECK ADD  CONSTRAINT [FK_CIUDAD_PROVINCIA] FOREIGN KEY([IdProvincia])
+REFERENCES [dbo].[PROVINCIA] ([Id])
+GO
+ALTER TABLE [dbo].[CIUDAD] CHECK CONSTRAINT [FK_CIUDAD_PROVINCIA]
+GO
+ALTER TABLE [dbo].[DETALLE_VENTA]  WITH CHECK ADD  CONSTRAINT [FK_DETALLE_VENTA_PRODUCTO] FOREIGN KEY([IdProducto])
+REFERENCES [dbo].[PRODUCTO] ([Id])
+GO
+ALTER TABLE [dbo].[DETALLE_VENTA] CHECK CONSTRAINT [FK_DETALLE_VENTA_PRODUCTO]
+GO
+ALTER TABLE [dbo].[DETALLE_VENTA]  WITH CHECK ADD  CONSTRAINT [FK_DETALLE_VENTA_VENTA] FOREIGN KEY([IdVenta])
+REFERENCES [dbo].[VENTA] ([Id])
+GO
+ALTER TABLE [dbo].[DETALLE_VENTA] CHECK CONSTRAINT [FK_DETALLE_VENTA_VENTA]
+GO
+ALTER TABLE [dbo].[PRODUCTO]  WITH CHECK ADD  CONSTRAINT [FK_PRODUCTO_CATEGORIA] FOREIGN KEY([IdCategoria])
+REFERENCES [dbo].[CATEGORIA] ([Id])
+GO
+ALTER TABLE [dbo].[PRODUCTO] CHECK CONSTRAINT [FK_PRODUCTO_CATEGORIA]
+GO
+ALTER TABLE [dbo].[PRODUCTO]  WITH CHECK ADD  CONSTRAINT [FK_PRODUCTO_MARCA] FOREIGN KEY([IdMarca])
+REFERENCES [dbo].[MARCA] ([Id])
+GO
+ALTER TABLE [dbo].[PRODUCTO] CHECK CONSTRAINT [FK_PRODUCTO_MARCA]
+GO
+ALTER TABLE [dbo].[VENTA]  WITH CHECK ADD  CONSTRAINT [FK_VENTA_CIUDAD] FOREIGN KEY([IdCiudad])
+REFERENCES [dbo].[CIUDAD] ([Id])
+GO
+ALTER TABLE [dbo].[VENTA] CHECK CONSTRAINT [FK_VENTA_CIUDAD]
+GO
+ALTER TABLE [dbo].[VENTA]  WITH CHECK ADD  CONSTRAINT [FK_VENTA_USUARIO] FOREIGN KEY([IdUsuario])
+REFERENCES [dbo].[USUARIO] ([Id])
+GO
+ALTER TABLE [dbo].[VENTA] CHECK CONSTRAINT [FK_VENTA_USUARIO]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_EditarCategoria]    Script Date: 23/2/2025 12:05:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create proc [dbo].[sp_EditarCategoria](
+@IdCategoria int,
+@Descripcion varchar(50),
+@Activo bit,
+@Mensaje varchar(500) output,
+@Resultado int output
+)
+as
+begin
+	set @Resultado = 0
+	if not exists(select * from CATEGORIA where Descripcion = @Descripcion and Id != @IdCategoria)
+	begin
+		update top(1) CATEGORIA set
+		Descripcion = @Descripcion,
+		Activo = @Activo
+		where Id = @IdCategoria
+
+		set @Resultado = 1
+	end
+	else
+		set @Mensaje = 'La categoría ya existe'
+end
+GO
+/****** Object:  StoredProcedure [dbo].[sp_EditarMarca]    Script Date: 23/2/2025 12:05:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create proc [dbo].[sp_EditarMarca](
+@IdCategoria int,
+@Descripcion varchar(50),
+@Activo bit,
+@Mensaje varchar(500) output,
+@Resultado int output
+)
+as
+begin
+	set @Resultado = 0
+	if not exists(select * from MARCA where Descripcion = @Descripcion and Id != @IdCategoria)
+	begin
+		update top(1) MARCA set
+		Descripcion = @Descripcion,
+		Activo = @Activo
+		where Id = @IdCategoria
+
+		set @Resultado = 1
+	end
+	else
+		set @Mensaje = 'La marca ya existe'
+end
+GO
+/****** Object:  StoredProcedure [dbo].[sp_EditarProducto]    Script Date: 23/2/2025 12:05:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create proc [dbo].[sp_EditarProducto](
+@IdProducto int,
+@Nombre varchar(50),
+@Descripcion varchar(100),
+@IdMarca int,
+@IdCategoria int,
+@Precio decimal(10,2),
+@Stock int,
+@Activo bit,
+@Mensaje varchar(500) output,
+@Resultado bit output
+)
+as
+begin
+	set @Resultado = 0
+	if not exists(select * from PRODUCTO where Nombre = @Nombre and Id != @IdProducto)
+	begin
+		update PRODUCTO set 
+		Nombre = @Nombre,
+		Descripcion = @Descripcion,
+		IdMarca = @IdMarca,
+		IdCategoria = @IdCategoria,
+		Precio = @Precio,
+		Stock = @Stock,
+		Activo = @Activo
+		where Id = @IdProducto
+
+		set @Resultado = 1
+	end
+	else
+		set @Mensaje = 'El producto ya existe'
+end
+GO
+/****** Object:  StoredProcedure [dbo].[sp_EditarUsuario]    Script Date: 23/2/2025 12:05:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create proc [dbo].[sp_EditarUsuario](
+@IdUsuario int,
+@Nombre varchar(50),
+@Apellido varchar(50),
+@Correo varchar(100),
+@Activo bit,
+@Mensaje varchar(500) output,
+@Resultado bit output
+)
+as
+begin
+	set @Resultado = 0
+	if not exists (select * from USUARIO where Correo = @Correo and Id != @IdUsuario)
+	begin
+		update top(1) USUARIO set 
+		Nombre = @Nombre,
+		Apellido = @Apellido,
+		Correo = @Correo,
+		Activo = @Activo 
+		where Id = @IdUsuario
+		
+		set @Resultado = 1
+	end
+	else
+		set @Mensaje = 'El correo del usuario ya existe'
+end
+GO
+/****** Object:  StoredProcedure [dbo].[sp_EliminarCarrito]    Script Date: 23/2/2025 12:05:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create proc [dbo].[sp_EliminarCarrito](
+@IdUsuario int,
+@IdProducto int,
+@Resultado bit output
+)
+as
+begin
+	set @Resultado = 1
+	declare @cantidadProducto int = (select Cantidad from CARRITO where IdUsuario = @IdUsuario  and IdProducto = @IdProducto)
+
+	BEGIN TRY
+		BEGIN TRANSACTION OPERACION
+
+		update PRODUCTO set Stock = Stock+@cantidadProducto where Id = @IdProducto
+
+		delete top(1) from CARRITO where IdUsuario = @IdUsuario and IdProducto = @IdProducto
+
+		COMMIT TRANSACTION OPERACION
+	END TRY
+	BEGIN CATCH
+		set @Resultado = 0
+		ROLLBACK TRANSACTION OPERACION
+	END CATCH
+end
+GO
+/****** Object:  StoredProcedure [dbo].[sp_EliminarCategoria]    Script Date: 23/2/2025 12:05:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create proc [dbo].[sp_EliminarCategoria](
+@IdCategoria int,
+@Mensaje varchar(500),
+@Resultado bit output
+)
+as
+begin
+	set @Resultado = 0
+	if not exists(select * from PRODUCTO p
+	inner join CATEGORIA c on c.Id = p.IdCategoria where p.IdCategoria = @IdCategoria)
+	begin
+		delete top(1) from CATEGORIA
+		where Id = @IdCategoria
+
+		set @Resultado = 1
+	end
+	else
+		set @Mensaje = 'La categoría se encuentra relacionada a un producto'
+end
+GO
+/****** Object:  StoredProcedure [dbo].[sp_EliminarMarca]    Script Date: 23/2/2025 12:05:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create proc [dbo].[sp_EliminarMarca](
+@IdMarca int,
+@Mensaje varchar(500),
+@Resultado bit output
+)
+as
+begin
+	set @Resultado = 0
+	if not exists(select * from PRODUCTO p
+	inner join MARCA m on m.Id = p.IdMarca where p.IdMarca = @IdMarca)
+	begin
+		delete top(1) from MARCA
+		where Id = @IdMarca
+
+		set @Resultado = 1
+	end
+	else
+		set @Mensaje = 'La marca se encuentra relacionada a un producto'
+end
+GO
+/****** Object:  StoredProcedure [dbo].[sp_EliminarProducto]    Script Date: 23/2/2025 12:05:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create proc [dbo].[sp_EliminarProducto](
+@IdProducto int,
+@Mensaje varchar(500) output,
+@Resultado bit output
+)
+as
+begin
+	set @Resultado = 0
+	if not exists(select * from DETALLE_VENTA dv 
+	inner join PRODUCTO p on p.Id = dv.IdProducto where p.Id = @IdProducto)
+	begin
+		delete top(1) from PRODUCTO where Id = @IdProducto
+		
+		set @Resultado = 1
+	end
+	else
+		set @Mensaje = 'El producto se encuentra relacionado a una venta'
+end
+GO
+/****** Object:  StoredProcedure [dbo].[sp_ExisteCarrito]    Script Date: 23/2/2025 12:05:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create proc [dbo].[sp_ExisteCarrito](
+@IdUsuario int,
+@IdProducto int,
+@Resultado bit output
+)
+as
+begin
+	if exists(select * from CARRITO where IdUsuario = @IdUsuario and IdProducto = @IdProducto)
+		set @Resultado = 1
+	else
+		set @Resultado = 0
+end
+GO
+/****** Object:  StoredProcedure [dbo].[sp_OperacionCarrito]    Script Date: 23/2/2025 12:05:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create proc [dbo].[sp_OperacionCarrito](
+@IdUsuario int,
+@IdProducto int,
+@Sumar bit,
+@Mensaje varchar(500) output,
+@Resultado bit output
+)
+as
+begin
+	set @Resultado = 1
+	set @Mensaje = ''
+
+	declare @existeCarrito bit = iif(exists(select * from CARRITO where IdUsuario = @IdUsuario and IdProducto = @IdProducto),1,0)
+
+	declare @stockProducto int = (select Stock from PRODUCTO where Id = @IdProducto)
+
+	BEGIN TRY
+		BEGIN TRANSACTION OPERACION
+			if(@Sumar = 1)
+			begin
+				if(@stockProducto > 0)
+				begin
+					if(@existeCarrito = 1)
+						update CARRITO set Cantidad = Cantidad+1 where IdUsuario = @IdUsuario and IdProducto = @IdProducto
+					else
+						insert into CARRITO (IdUsuario,IdProducto,Cantidad) values (@IdUsuario,@IdProducto,1)
+
+					update PRODUCTO set Stock = Stock-1 where Id = @IdProducto
+				end
+				else
+				begin
+					set @Resultado = 0
+					set @Mensaje = 'El producto no cuenta con stock disponible.'
+				end
+			end
+			else
+			begin
+				update CARRITO set Cantidad = Cantidad-1 where IdUsuario = @IdUsuario and IdProducto = @IdProducto
+				update PRODUCTO set Stock = Stock+1 where Id = @IdProducto
+			end
+		COMMIT TRANSACTION OPERACION
+	END TRY
+	BEGIN CATCH
+		set @Resultado = 0
+		set @Mensaje = ERROR_MESSAGE()
+		ROLLBACK TRANSACTION OPERACION
+	END CATCH
+end
+GO
+/****** Object:  StoredProcedure [dbo].[sp_RegistrarCategoria]    Script Date: 23/2/2025 12:05:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create proc [dbo].[sp_RegistrarCategoria](
+@Descripcion varchar(50),
+@Activo bit,
+@Mensaje varchar(500) output,
+@Resultado int output
+)
+as
+begin
+	set @Resultado = 0
+	if not exists(select * from CATEGORIA where Descripcion = @Descripcion)
+	begin
+		insert into CATEGORIA(Descripcion, Activo) values (@Descripcion, @Activo)
+		set @Resultado = SCOPE_IDENTITY()
+	end
+	else
+		set @Mensaje = 'La categoría ya existe'
+end
+GO
+/****** Object:  StoredProcedure [dbo].[sp_RegistrarMarca]    Script Date: 23/2/2025 12:05:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create proc [dbo].[sp_RegistrarMarca](
+@Descripcion varchar(50),
+@Activo bit,
+@Mensaje varchar(500) output,
+@Resultado int output
+)
+as
+begin
+	set @Resultado = 0
+	if not exists(select * from MARCA where Descripcion = @Descripcion)
+	begin
+		insert into MARCA(Descripcion, Activo) values (@Descripcion, @Activo)
+		set @Resultado = SCOPE_IDENTITY()
+	end
+	else
+		set @Mensaje = 'La marca ya existe'
+end
+GO
+/****** Object:  StoredProcedure [dbo].[sp_RegistrarProducto]    Script Date: 23/2/2025 12:05:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create proc [dbo].[sp_RegistrarProducto](
+@Nombre varchar(50),
+@Descripcion varchar(100),
+@IdMarca int,
+@IdCategoria int,
+@Precio decimal(10,2),
+@Stock int,
+@Activo bit,
+@Mensaje varchar(500) output,
+@Resultado int output
+)
+as
+begin
+	set @Resultado = 0
+	if not exists(select * from PRODUCTO where Nombre = @Nombre)
+	begin
+		insert into PRODUCTO (Nombre,Descripcion,IdMarca,IdCategoria,Precio,Stock,Activo)
+		values(@Nombre,@Descripcion,@IdMarca,@IdCategoria,@Precio,@Stock,@Activo)
+
+		set @Resultado = SCOPE_IDENTITY()
+	end
+	else
+		set @Mensaje = 'El producto ya existe'
+end
+GO
+/****** Object:  StoredProcedure [dbo].[sp_RegistrarUsuario]    Script Date: 23/2/2025 12:05:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create proc [dbo].[sp_RegistrarUsuario](
+@Nombre varchar(50),
+@Apellido varchar(50),
+@Correo varchar(100),
+@Clave varchar(150),
+@Activo bit,
+@IsAdmin bit,
+@Mensaje varchar(500) output,
+@Resultado int output
+)
+as
+begin
+	set @Resultado = 0
+	if not exists (select * from USUARIO where Correo = @Correo)
+	begin
+		insert into USUARIO(Nombre,Apellido,Correo,Clave,Activo,IsAdmin) values
+		(@Nombre,@Apellido,@Correo,@Activo,@Clave,@IsAdmin)
+		
+		set @Resultado = SCOPE_IDENTITY()
+	end
+	else
+		set @Mensaje = 'El correo del usuario ya existe'
+end
+GO
+/****** Object:  StoredProcedure [dbo].[sp_ReporteDashboard]    Script Date: 23/2/2025 12:05:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create proc [dbo].[sp_ReporteDashboard]
+as
+begin
+	select
+	(select count(*) from USUARIO where IsAdmin = 0)[TotalCliente],
+	(select ISNULL(sum(Cantidad),0) from DETALLE_VENTA)[TotalVenta],
+	(select count(*) from PRODUCTO)[TotalProducto]
+end
+GO
+/****** Object:  StoredProcedure [dbo].[sp_ReporteVentas]    Script Date: 23/2/2025 12:05:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create proc [dbo].[sp_ReporteVentas](
+@FechaInicio varchar(10),
+@FechaFin varchar(10),
+@IdTransaccion varchar(100)
+)
+as
+begin
+	set dateformat dmy;
+	select convert(char(10), v.FechaVenta, 103)FechaVenta,
+	concat(u.Nombre,' ',u.Apellido)Cliente,
+	p.Nombre Producto,p.Precio,dv.Cantidad,dv.Total,v.IdTransaccion
+	from DETALLE_VENTA dv
+	inner join PRODUCTO p on p.Id = dv.IdProducto
+	inner join VENTA v on v.Id = dv.IdVenta
+	inner join USUARIO u on u.Id = v.IdUsuario
+	where CONVERT(date, v.FechaVenta) between @FechaInicio and @FechaFin
+	and v.IdTransaccion = iif(@IdTransaccion = '', v.IdTransaccion, @IdTransaccion)
+end
+GO
+/****** Object:  StoredProcedure [dbo].[usp_RegistrarVenta]    Script Date: 23/2/2025 12:05:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create proc [dbo].[usp_RegistrarVenta](
+@IdUsuario int,
+@TotalProducto int,
+@MontoTotal decimal(18,2),
+@Contacto varchar(100),
+@IdCiudad int,
+@Telefono varchar(50),
+@Direccion varchar(100),
+@IdTransaccion varchar(100),
+@DetalleVenta [EDetalle_Venta] READONLY,
+@Resultado bit output,
+@Mensaje varchar(500)
+)
+as
+begin
+	BEGIN TRY
+		declare @idVenta int = 0
+		set @Resultado = 0
+		set @Mensaje = ''
+
+		BEGIN TRANSACTION REGISTRO
+			insert into VENTA(IdUsuario,TotalProducto,MontoTotal,Contacto,IdCiudad,Telefono,Direccion,IdTransaccion)
+			values (@IdUsuario,@TotalProducto,@MontoTotal,@Contacto,@IdCiudad,@Telefono,@Direccion,@IdTransaccion)
+
+			set @idVenta = SCOPE_IDENTITY()
+
+			insert into DETALLE_VENTA(IdVenta,IdProducto,Cantidad,Total)
+			select @idVenta,IdProducto,Cantidad,Total from @DetalleVenta 
+
+			delete from CARRITO where IdUsuario = @IdUsuario
+
+			COMMIT TRANSACTION REGISTRO
+	END TRY
+	BEGIN CATCH
+		set @Resultado = 0
+		set @Mensaje = ERROR_MESSAGE()
+		ROLLBACK TRANSACTION REGISTRO
+	END CATCH
+end
+GO
+USE [master]
+GO
+ALTER DATABASE [TECHNO_THINGS_DB] SET  READ_WRITE 
+GO

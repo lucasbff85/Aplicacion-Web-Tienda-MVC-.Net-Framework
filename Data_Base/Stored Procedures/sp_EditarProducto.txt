@@ -1,0 +1,34 @@
+create proc sp_EditarProducto(
+@IdProducto int,
+@Nombre varchar(50),
+@Descripcion varchar(100),
+@IdMarca int,
+@IdCategoria int,
+@Precio decimal(10,2),
+@PrecioTexto varchar(20),
+@Stock int,
+@Activo bit,
+@Mensaje varchar(500) output,
+@Resultado bit output
+)
+as
+begin
+	set @Resultado = 0
+	if not exists(select * from PRODUCTO where Nombre = @Nombre and Id != @IdProducto)
+	begin
+		update PRODUCTO set 
+		Nombre = @Nombre,
+		Descripcion = @Descripcion,
+		IdMarca = @IdMarca,
+		IdCategoria = @IdCategoria,
+		Precio = @Precio,
+		PrecioTexto = @PrecioTexto,
+		Stock = @Stock,
+		Activo = @Activo
+		where Id = @IdProducto
+
+		set @Resultado = 1
+	end
+	else
+		set @Mensaje = 'El producto ya existe'
+end

@@ -1,0 +1,6 @@
+D:\PROGRAMACION\.NET\TECHNO_THINGS_LB\TECHNO_THINGS\CapaEntidad\bin\Debug\CapaEntidad.dll
+D:\PROGRAMACION\.NET\TECHNO_THINGS_LB\TECHNO_THINGS\CapaEntidad\bin\Debug\CapaEntidad.pdb
+D:\PROGRAMACION\.NET\TECHNO_THINGS_LB\TECHNO_THINGS\CapaEntidad\obj\Debug\CapaEntidad.csproj.AssemblyReference.cache
+D:\PROGRAMACION\.NET\TECHNO_THINGS_LB\TECHNO_THINGS\CapaEntidad\obj\Debug\CapaEntidad.csproj.CoreCompileInputs.cache
+D:\PROGRAMACION\.NET\TECHNO_THINGS_LB\TECHNO_THINGS\CapaEntidad\obj\Debug\CapaEntidad.dll
+D:\PROGRAMACION\.NET\TECHNO_THINGS_LB\TECHNO_THINGS\CapaEntidad\obj\Debug\CapaEntidad.pdb

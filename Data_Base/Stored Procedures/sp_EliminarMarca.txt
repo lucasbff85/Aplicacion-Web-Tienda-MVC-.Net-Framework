@@ -1,0 +1,19 @@
+create proc sp_EliminarMarca(
+@IdMarca int,
+@Mensaje varchar(500) output,
+@Resultado bit output
+)
+as
+begin
+	set @Resultado = 0
+	if not exists(select * from PRODUCTO p
+	inner join MARCA m on m.Id = p.IdMarca where p.IdMarca = @IdMarca)
+	begin
+		delete top(1) from MARCA
+		where Id = @IdMarca
+
+		set @Resultado = 1
+	end
+	else
+		set @Mensaje = 'La marca se encuentra relacionada a un producto'
+end

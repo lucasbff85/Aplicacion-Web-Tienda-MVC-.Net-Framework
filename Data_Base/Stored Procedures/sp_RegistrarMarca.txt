@@ -1,0 +1,17 @@
+create proc sp_RegistrarMarca(
+@Descripcion varchar(50),
+@Activo bit,
+@Mensaje varchar(500) output,
+@Resultado int output
+)
+as
+begin
+	set @Resultado = 0
+	if not exists(select * from MARCA where Descripcion = @Descripcion)
+	begin
+		insert into MARCA(Descripcion, Activo) values (@Descripcion, @Activo)
+		set @Resultado = SCOPE_IDENTITY()
+	end
+	else
+		set @Mensaje = 'La marca ya existe'
+end

@@ -1,0 +1,39 @@
+create proc usp_RegistrarVenta(
+@IdUsuario int,
+@TotalProducto int,
+@MontoTotal decimal(18,2),
+@Contacto varchar(100),
+@IdCiudad int,
+@Telefono varchar(50),
+@Direccion varchar(100),
+@IdTransaccion varchar(100),
+@DetalleVenta [EDetalle_Venta] READONLY,
+@Resultado bit output,
+@Mensaje varchar(500)
+)
+as
+begin
+	BEGIN TRY
+		declare @idVenta int = 0
+		set @Resultado = 0
+		set @Mensaje = ''
+
+		BEGIN TRANSACTION REGISTRO
+			insert into VENTA(IdUsuario,TotalProducto,MontoTotal,Contacto,IdCiudad,Telefono,Direccion,IdTransaccion)
+			values (@IdUsuario,@TotalProducto,@MontoTotal,@Contacto,@IdCiudad,@Telefono,@Direccion,@IdTransaccion)
+
+			set @idVenta = SCOPE_IDENTITY()
+
+			insert into DETALLE_VENTA(IdVenta,IdProducto,Cantidad,Total)
+			select @idVenta,IdProducto,Cantidad,Total from @DetalleVenta 
+
+			delete from CARRITO where IdUsuario = @IdUsuario
+
+			COMMIT TRANSACTION REGISTRO
+	END TRY
+	BEGIN CATCH
+		set @Resultado = 0
+		set @Mensaje = ERROR_MESSAGE()
+		ROLLBACK TRANSACTION REGISTRO
+	END CATCH
+end

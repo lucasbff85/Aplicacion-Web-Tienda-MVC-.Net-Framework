@@ -1,0 +1,26 @@
+create proc sp_EditarUsuario(
+@IdUsuario int,
+@Nombre varchar(50),
+@Apellido varchar(50),
+@Correo varchar(100),
+@Activo bit,
+@Mensaje varchar(500) output,
+@Resultado bit output
+)
+as
+begin
+	set @Resultado = 0
+	if not exists (select * from USUARIO where Correo = @Correo and Id != @IdUsuario)
+	begin
+		update top(1) USUARIO set 
+		Nombre = @Nombre,
+		Apellido = @Apellido,
+		Correo = @Correo,
+		Activo = @Activo 
+		where Id = @IdUsuario
+		
+		set @Resultado = 1
+	end
+	else
+		set @Mensaje = 'El correo del usuario ya existe'
+end
