@@ -1,12 +1,117 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\PROGRAMACION\\.NET\\TECHNO_THINGS_LB\\TECHNO_THINGS\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{4F029E99-B502-4BDA-B1A9-9E892775BBD0}|CapaDatos\\CapaDatos.csproj|d:\\programacion\\.net\\techno_things_lb\\techno_things\\capadatos\\cd_usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4F029E99-B502-4BDA-B1A9-9E892775BBD0}|CapaDatos\\CapaDatos.csproj|solutionrelative:capadatos\\cd_usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8AC05D7C-83D9-4A68-A067-38FE4D48516A}|CapaNegocio\\CapaNegocio.csproj|D:\\PROGRAMACION\\.NET\\TECHNO_THINGS_LB\\TECHNO_THINGS\\capanegocio\\cn_usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8AC05D7C-83D9-4A68-A067-38FE4D48516A}|CapaNegocio\\CapaNegocio.csproj|solutionrelative:capanegocio\\cn_usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{239CB968-F1ED-41B5-9E48-A537BD349A15}|CapaPresentacion\\CapaPresentacion.csproj|D:\\PROGRAMACION\\.NET\\TECHNO_THINGS_LB\\TECHNO_THINGS\\capapresentacion\\controllers\\accesocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{239CB968-F1ED-41B5-9E48-A537BD349A15}|CapaPresentacion\\CapaPresentacion.csproj|solutionrelative:capapresentacion\\controllers\\accesocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{239CB968-F1ED-41B5-9E48-A537BD349A15}|CapaPresentacion\\CapaPresentacion.csproj|D:\\PROGRAMACION\\.NET\\TECHNO_THINGS_LB\\TECHNO_THINGS\\capapresentacion\\views\\acceso\\cambiarclave.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{239CB968-F1ED-41B5-9E48-A537BD349A15}|CapaPresentacion\\CapaPresentacion.csproj|solutionrelative:capapresentacion\\views\\acceso\\cambiarclave.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{239CB968-F1ED-41B5-9E48-A537BD349A15}|CapaPresentacion\\CapaPresentacion.csproj|D:\\PROGRAMACION\\.NET\\TECHNO_THINGS_LB\\TECHNO_THINGS\\capapresentacion\\controllers\\editorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{239CB968-F1ED-41B5-9E48-A537BD349A15}|CapaPresentacion\\CapaPresentacion.csproj|solutionrelative:capapresentacion\\controllers\\editorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{239CB968-F1ED-41B5-9E48-A537BD349A15}|CapaPresentacion\\CapaPresentacion.csproj|D:\\PROGRAMACION\\.NET\\TECHNO_THINGS_LB\\TECHNO_THINGS\\capapresentacion\\views\\acceso\\registrar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{239CB968-F1ED-41B5-9E48-A537BD349A15}|CapaPresentacion\\CapaPresentacion.csproj|solutionrelative:capapresentacion\\views\\acceso\\registrar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CD_Usuario.cs",
+              "DocumentMoniker": "D:\\PROGRAMACION\\.NET\\TECHNO_THINGS_LB\\TECHNO_THINGS\\CapaDatos\\CD_Usuario.cs",
+              "RelativeDocumentMoniker": "CapaDatos\\CD_Usuario.cs",
+              "ToolTip": "D:\\PROGRAMACION\\.NET\\TECHNO_THINGS_LB\\TECHNO_THINGS\\CapaDatos\\CD_Usuario.cs",
+              "RelativeToolTip": "CapaDatos\\CD_Usuario.cs",
+              "ViewState": "AgIAAPcAAAAAAAAAAAAtwAoBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-04T12:46:28.519Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AccesoController.cs",
+              "DocumentMoniker": "D:\\PROGRAMACION\\.NET\\TECHNO_THINGS_LB\\TECHNO_THINGS\\CapaPresentacion\\Controllers\\AccesoController.cs",
+              "RelativeDocumentMoniker": "CapaPresentacion\\Controllers\\AccesoController.cs",
+              "ToolTip": "D:\\PROGRAMACION\\.NET\\TECHNO_THINGS_LB\\TECHNO_THINGS\\CapaPresentacion\\Controllers\\AccesoController.cs",
+              "RelativeToolTip": "CapaPresentacion\\Controllers\\AccesoController.cs",
+              "ViewState": "AgIAAIoAAAAAAAAAAAAiwKIAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-04T12:06:12.547Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CN_Usuario.cs",
+              "DocumentMoniker": "D:\\PROGRAMACION\\.NET\\TECHNO_THINGS_LB\\TECHNO_THINGS\\CapaNegocio\\CN_Usuario.cs",
+              "RelativeDocumentMoniker": "CapaNegocio\\CN_Usuario.cs",
+              "ToolTip": "D:\\PROGRAMACION\\.NET\\TECHNO_THINGS_LB\\TECHNO_THINGS\\CapaNegocio\\CN_Usuario.cs",
+              "RelativeToolTip": "CapaNegocio\\CN_Usuario.cs",
+              "ViewState": "AgIAAHYAAAAAAAAAAAAkwJYAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-04T14:11:59.974Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CambiarClave.cshtml",
+              "DocumentMoniker": "D:\\PROGRAMACION\\.NET\\TECHNO_THINGS_LB\\TECHNO_THINGS\\CapaPresentacion\\Views\\Acceso\\CambiarClave.cshtml",
+              "RelativeDocumentMoniker": "CapaPresentacion\\Views\\Acceso\\CambiarClave.cshtml",
+              "ToolTip": "D:\\PROGRAMACION\\.NET\\TECHNO_THINGS_LB\\TECHNO_THINGS\\CapaPresentacion\\Views\\Acceso\\CambiarClave.cshtml",
+              "RelativeToolTip": "CapaPresentacion\\Views\\Acceso\\CambiarClave.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-04T14:20:03.493Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Registrar.cshtml",
+              "DocumentMoniker": "D:\\PROGRAMACION\\.NET\\TECHNO_THINGS_LB\\TECHNO_THINGS\\CapaPresentacion\\Views\\Acceso\\Registrar.cshtml",
+              "RelativeDocumentMoniker": "CapaPresentacion\\Views\\Acceso\\Registrar.cshtml",
+              "ToolTip": "D:\\PROGRAMACION\\.NET\\TECHNO_THINGS_LB\\TECHNO_THINGS\\CapaPresentacion\\Views\\Acceso\\Registrar.cshtml",
+              "RelativeToolTip": "CapaPresentacion\\Views\\Acceso\\Registrar.cshtml",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-04T14:10:55Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "EditorController.cs",
+              "DocumentMoniker": "D:\\PROGRAMACION\\.NET\\TECHNO_THINGS_LB\\TECHNO_THINGS\\CapaPresentacion\\Controllers\\EditorController.cs",
+              "RelativeDocumentMoniker": "CapaPresentacion\\Controllers\\EditorController.cs",
+              "ToolTip": "D:\\PROGRAMACION\\.NET\\TECHNO_THINGS_LB\\TECHNO_THINGS\\CapaPresentacion\\Controllers\\EditorController.cs",
+              "RelativeToolTip": "CapaPresentacion\\Controllers\\EditorController.cs",
+              "ViewState": "AgIAAIUAAAAAAAAAAAAswBgBAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-04T14:11:08.085Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

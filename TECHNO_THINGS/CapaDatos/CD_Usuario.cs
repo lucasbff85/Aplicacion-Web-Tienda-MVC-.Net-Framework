@@ -22,7 +22,7 @@ namespace CapaDatos
             {
                 using (SqlConnection oconexion = new SqlConnection(Conexion.cn))
                 {
-                    string query = "select Id,Nombre,Apellido,Correo,Clave,Reestablecer,Activo,IsAdmin from USUARIO";
+                    string query = "select Id,Nombre,Apellido,Correo,Clave,Restablecer,Activo,IsAdmin from USUARIO";
                     SqlCommand cmd = new SqlCommand(query, oconexion);
                     cmd.CommandType = CommandType.Text;
                     oconexion.Open();
@@ -38,7 +38,7 @@ namespace CapaDatos
                                 Apellido = dr["Apellido"].ToString(),
                                 Correo = dr["Correo"].ToString(),
                                 Clave = dr["Clave"].ToString(),
-                                Reestablecer = Convert.ToBoolean(dr["Reestablecer"]),
+                                Restablecer = Convert.ToBoolean(dr["Restablecer"]),
                                 Activo = Convert.ToBoolean(dr["Activo"]),
                                 IsAdmin = Convert.ToBoolean(dr["IsAdmin"])
                             });
@@ -100,7 +100,7 @@ namespace CapaDatos
 
 
 
-        public int Registrar(Usuario obj, out string Mensaje, bool isAdmin)
+        public int RegistrarAdmin(Usuario obj, out string Mensaje)
         {
             int idautogenerado = 0;
 
@@ -110,12 +110,13 @@ namespace CapaDatos
                 using (SqlConnection oconexion = new SqlConnection(Conexion.cn))
                 {
                     SqlCommand cmd = new SqlCommand("sp_RegistrarUsuario", oconexion);
-                    cmd.Parameters.AddWithValue("Nombres", obj.Nombre);
-                    cmd.Parameters.AddWithValue("Apellidos", obj.Apellido);
+                    cmd.Parameters.AddWithValue("Nombre", obj.Nombre);
+                    cmd.Parameters.AddWithValue("Apellido", obj.Apellido);
                     cmd.Parameters.AddWithValue("Correo", obj.Correo);
                     cmd.Parameters.AddWithValue("Clave", obj.Clave);
-                    cmd.Parameters.AddWithValue("Activo", obj.Activo);
-                    cmd.Parameters.AddWithValue("IsAdmin", isAdmin);
+                    cmd.Parameters.AddWithValue("Activo", 1);
+                    cmd.Parameters.AddWithValue("IsAdmin", 1);
+                    cmd.Parameters.AddWithValue("Restablecer", 1);
                     cmd.Parameters.Add("Resultado", SqlDbType.Int).Direction = ParameterDirection.Output;
                     cmd.Parameters.Add("Mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -139,6 +140,47 @@ namespace CapaDatos
             return idautogenerado;
         }
 
+        public int Registrar(Usuario obj, out string Mensaje)
+        {
+            int idautogenerado = 0;
+
+            Mensaje = string.Empty;
+            try
+            {
+                using (SqlConnection oconexion = new SqlConnection(Conexion.cn))
+                {
+                    SqlCommand cmd = new SqlCommand("sp_RegistrarUsuario", oconexion);
+                    cmd.Parameters.AddWithValue("Nombre", obj.Nombre);
+                    cmd.Parameters.AddWithValue("Apellido", obj.Apellido);
+                    cmd.Parameters.AddWithValue("Correo", obj.Correo);
+                    cmd.Parameters.AddWithValue("Clave", obj.Clave);
+                    cmd.Parameters.AddWithValue("Activo", 1);
+                    cmd.Parameters.AddWithValue("IsAdmin", 0);
+                    cmd.Parameters.AddWithValue("Restablecer", 0);
+                    cmd.Parameters.Add("Resultado", SqlDbType.Int).Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("Mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    oconexion.Open();
+
+                    cmd.ExecuteNonQuery();
+
+                    idautogenerado = Convert.ToInt32(cmd.Parameters["Resultado"].Value);
+                    Mensaje = cmd.Parameters["Mensaje"].Value.ToString();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                idautogenerado = 0;
+                Mensaje = ex.Message;
+
+            }
+
+            return idautogenerado;
+        }
+
+
         public bool Editar(Usuario obj, out string Mensaje)
         {
             bool resultado = false;
@@ -150,8 +192,8 @@ namespace CapaDatos
                 {
                     SqlCommand cmd = new SqlCommand("sp_EditarUsuario", oconexion);
                     cmd.Parameters.AddWithValue("IdUsuario", obj.Id);
-                    cmd.Parameters.AddWithValue("Nombres", obj.Nombre);
-                    cmd.Parameters.AddWithValue("Apellidos", obj.Apellido);
+                    cmd.Parameters.AddWithValue("Nombre", obj.Nombre);
+                    cmd.Parameters.AddWithValue("Apellido", obj.Apellido);
                     cmd.Parameters.AddWithValue("Correo", obj.Correo);
                     cmd.Parameters.AddWithValue("Activo", obj.Activo);
                     cmd.Parameters.Add("Resultado", SqlDbType.Int).Direction = ParameterDirection.Output;
@@ -210,7 +252,7 @@ namespace CapaDatos
             {
                 using (SqlConnection oconexion = new SqlConnection(Conexion.cn))
                 {
-                    SqlCommand cmd = new SqlCommand("update USUARIO set clave = @nuevaclave, Reestablecer = 0 where Id = @id", oconexion);
+                    SqlCommand cmd = new SqlCommand("update USUARIO set clave = @nuevaclave, Restablecer = 0 where Id = @id", oconexion);
                     cmd.Parameters.AddWithValue("@id", idusuario);
                     cmd.Parameters.AddWithValue("@nuevaclave", nuevaclave);
 
@@ -229,7 +271,7 @@ namespace CapaDatos
             return resultado;
         }
 
-        public bool ReestablecerClave(int idusuario, string clave, out string Mensaje)
+        public bool RestablecerClave(int idusuario, string clave, out string Mensaje)
         {
             bool resultado = false;
             Mensaje = string.Empty;
@@ -237,7 +279,7 @@ namespace CapaDatos
             {
                 using (SqlConnection oconexion = new SqlConnection(Conexion.cn))
                 {
-                    SqlCommand cmd = new SqlCommand("update USUARIO set clave = @clave, Reestablecer = 1 where Id = @id", oconexion);
+                    SqlCommand cmd = new SqlCommand("update USUARIO set clave = @clave, Restablecer = 1 where Id = @id", oconexion);
                     cmd.Parameters.AddWithValue("@id", idusuario);
                     cmd.Parameters.AddWithValue("@clave", clave);
 

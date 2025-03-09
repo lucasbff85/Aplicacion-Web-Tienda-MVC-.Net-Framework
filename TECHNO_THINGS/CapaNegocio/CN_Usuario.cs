@@ -63,7 +63,7 @@ namespace CapaNegocio
                         obj.Clave = CN_Recursos.ConvertirSha256(clave);
 
 
-                        return objCapaDato.Registrar(obj, out Mensaje, true);
+                        return objCapaDato.RegistrarAdmin(obj, out Mensaje);
                     }
                     else
                     {
@@ -74,7 +74,7 @@ namespace CapaNegocio
                 else
                 {
                     obj.Clave = CN_Recursos.ConvertirSha256(obj.Clave);
-                    return objCapaDato.Registrar(obj, out Mensaje, false);
+                    return objCapaDato.Registrar(obj, out Mensaje);
                 }
                 
 
@@ -125,11 +125,11 @@ namespace CapaNegocio
             return objCapaDato.CambiarClave(idusuario, nuevaclave, out Mensaje);
         }
 
-        public bool ReestablecerClave(int idusuario, string correo, out string Mensaje)
+        public bool RestablecerClave(int idusuario, string correo, out string Mensaje)
         {
             Mensaje = string.Empty;
             string nuevaclave = CN_Recursos.GenerarClave();
-            bool resultado = objCapaDato.ReestablecerClave(idusuario, CN_Recursos.ConvertirSha256(nuevaclave), out Mensaje);
+            bool resultado = objCapaDato.RestablecerClave(idusuario, CN_Recursos.ConvertirSha256(nuevaclave), out Mensaje);
 
             if (resultado)
             {

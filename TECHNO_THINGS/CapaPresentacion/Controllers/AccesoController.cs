@@ -26,7 +26,7 @@ namespace CapaPresentacion.Controllers
             return View();
         }
 
-        public ActionResult Registrarse()
+        public ActionResult Registrar()
         {
             return View();
         }
@@ -79,33 +79,36 @@ namespace CapaPresentacion.Controllers
             else
             {
                 //compruebo si el usuario accede por primera vez
-                if (oUsuario.Reestablecer)
+                if (oUsuario.Restablecer)
                 {
                     TempData["IdUsuario"] = oUsuario.Id;
 
                     return RedirectToAction("CambiarClave"); //no es necesario aclarar el controlador porque esta dentro del mismo
                 }
-
-                //creando la autenticación del usuario por su correo
-                FormsAuthentication.SetAuthCookie(oUsuario.Correo, false);
-
-                ViewBag.Error = null;
-
-                if (oUsuario.IsAdmin)
-                {
-                    return RedirectToAction("Index", "Editor");
-                }
                 else
                 {
-                    return RedirectToAction("Index", "Home");
-                }
+                    //creando la autenticación del usuario por su correo
+                    FormsAuthentication.SetAuthCookie(oUsuario.Correo, false);
 
+                    Session["Usuario"] = oUsuario;
+
+                    ViewBag.Error = null;
+
+                    if (oUsuario.IsAdmin)
+                    {
+                        return RedirectToAction("Index", "Editor");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Tienda");
+                    }
+                }
 
             }
         }
 
         [HttpPost]
-        public ActionResult CambiarClave(string idusuario, string claveactual, string nuevaclave, string confirmarclave)
+        public ActionResult CambiarClave(string idusuario, string claveactual, string nuevaclave, string confirmaclave)
         {
             Usuario oUsuario = new Usuario();
 
@@ -118,7 +121,7 @@ namespace CapaPresentacion.Controllers
                 ViewBag.Error = "La contraseña actual no es correcta";
                 return View();
             }
-            else if (nuevaclave != confirmarclave)
+            else if (nuevaclave != confirmaclave)
             {
                 TempData["IdUsuario"] = idusuario;
                 ViewData["vclave"] = claveactual;
@@ -145,7 +148,7 @@ namespace CapaPresentacion.Controllers
         }
 
         [HttpPost]
-        public ActionResult Reestablecer(string correo)
+        public ActionResult Restablecer(string correo)
         {
             Usuario ousuario = new Usuario();
             ousuario = new CN_Usuario().Listar().Where(item => item.Correo == correo).FirstOrDefault();
@@ -157,7 +160,7 @@ namespace CapaPresentacion.Controllers
             }
 
             string mensaje = string.Empty;
-            bool respuesta = new CN_Usuario().ReestablecerClave(ousuario.Id, correo, out mensaje);
+            bool respuesta = new CN_Usuario().RestablecerClave(ousuario.Id, correo, out mensaje);
 
             if (respuesta)
             {

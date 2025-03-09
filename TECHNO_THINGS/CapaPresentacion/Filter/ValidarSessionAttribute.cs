@@ -12,7 +12,7 @@ namespace CapaPresentacionTienda.Filter
         {
             if (HttpContext.Current.Session["Cliente"] == null)
             {
-                filterContext.Result = new RedirectResult("~/Acceso/Index");
+                filterContext.Result = new RedirectResult("~/Acceso/Login");
                 return;
             }
 
