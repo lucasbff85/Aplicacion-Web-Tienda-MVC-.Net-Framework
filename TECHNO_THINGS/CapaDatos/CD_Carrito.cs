@@ -12,7 +12,7 @@ namespace CapaDatos
 {
     public class CD_Carrito
     {
-        public bool ExisteCarrito(int idcliente, int idproducto)
+        public bool ExisteCarrito(int idusuario, int idproducto)
         {
             bool resultado = true;
 
@@ -22,7 +22,7 @@ namespace CapaDatos
                 using (SqlConnection oconexion = new SqlConnection(Conexion.cn))
                 {
                     SqlCommand cmd = new SqlCommand("sp_ExisteCarrito", oconexion);
-                    cmd.Parameters.AddWithValue("IdCliente", idcliente);
+                    cmd.Parameters.AddWithValue("IdUsuario", idusuario);
                     cmd.Parameters.AddWithValue("IdProducto", idproducto);
                     cmd.Parameters.Add("Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -45,7 +45,7 @@ namespace CapaDatos
         }
 
 
-        public bool OperacionCarrito(int idcliente, int idproducto, bool sumar, out string Mensaje)
+        public bool OperacionCarrito(int idusuario, int idproducto, bool sumar, out string Mensaje)
         {
             bool resultado = true;
 
@@ -55,7 +55,7 @@ namespace CapaDatos
                 using (SqlConnection oconexion = new SqlConnection(Conexion.cn))
                 {
                     SqlCommand cmd = new SqlCommand("sp_OperacionCarrito", oconexion);
-                    cmd.Parameters.AddWithValue("IdCliente", idcliente);
+                    cmd.Parameters.AddWithValue("IdUsuario", idusuario);
                     cmd.Parameters.AddWithValue("IdProducto", idproducto);
                     cmd.Parameters.AddWithValue("Sumar", sumar);
                     cmd.Parameters.Add("Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
@@ -82,15 +82,15 @@ namespace CapaDatos
         }
 
 
-        public int CantidadEnCarrito(int idcliente)
+        public int CantidadEnCarrito(int idusuario)
         {
             int resultado = 0;
             try
             {
                 using (SqlConnection oconexion = new SqlConnection(Conexion.cn))
                 {
-                    SqlCommand cmd = new SqlCommand("select count(*) from CARRITO where IdCliente = @idcliente", oconexion);
-                    cmd.Parameters.AddWithValue("@idcliente", idcliente);
+                    SqlCommand cmd = new SqlCommand("select count(*) from CARRITO where IdUsuario = @idusuario", oconexion);
+                    cmd.Parameters.AddWithValue("@idusuario", idusuario);
                     cmd.CommandType = CommandType.Text;
                     oconexion.Open();
                     //ExecuteNonQuery() devuelve el numero de filas afectadas
@@ -105,7 +105,7 @@ namespace CapaDatos
             return resultado;
         }
 
-        public List<Carrito> ListarProducto(int idcliente)
+        public List<Carrito> ListarProducto(int idusuario)
         {
             List<Carrito> lista = new List<Carrito>();
 
@@ -114,10 +114,10 @@ namespace CapaDatos
             {
                 using (SqlConnection oconexion = new SqlConnection(Conexion.cn))
                 {
-                    string query = "select * from fn_obtenerCarritoCliente(@idcliente)";
+                    string query = "select * from fn_obtenerCarritoUsuario(@IdUsuario)";
 
                     SqlCommand cmd = new SqlCommand(query, oconexion);
-                    cmd.Parameters.AddWithValue("@idcliente", idcliente);
+                    cmd.Parameters.AddWithValue("@IdUsuario", idusuario);
                     cmd.CommandType = CommandType.Text;
                     oconexion.Open();
 
@@ -151,7 +151,7 @@ namespace CapaDatos
             return lista;
         }
 
-        public bool EliminarCarrito(int idcliente, int idproducto)
+        public bool EliminarCarrito(int idusuario, int idproducto)
         {
             bool resultado = true;
 
@@ -161,7 +161,7 @@ namespace CapaDatos
                 using (SqlConnection oconexion = new SqlConnection(Conexion.cn))
                 {
                     SqlCommand cmd = new SqlCommand("sp_EliminarCarrito", oconexion);
-                    cmd.Parameters.AddWithValue("IdCliente", idcliente);
+                    cmd.Parameters.AddWithValue("IdUsuario", idusuario);
                     cmd.Parameters.AddWithValue("IdProducto", idproducto);
                     cmd.Parameters.Add("Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
                     cmd.CommandType = CommandType.StoredProcedure;

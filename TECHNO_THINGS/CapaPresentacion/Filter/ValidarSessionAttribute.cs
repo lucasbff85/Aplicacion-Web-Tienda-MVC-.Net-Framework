@@ -10,7 +10,7 @@ namespace CapaPresentacionTienda.Filter
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            if (HttpContext.Current.Session["Cliente"] == null)
+            if (HttpContext.Current.Session["Usuario"] == null)
             {
                 filterContext.Result = new RedirectResult("~/Acceso/Login");
                 return;

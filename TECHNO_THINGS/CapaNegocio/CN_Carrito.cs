@@ -17,24 +17,24 @@ namespace CapaNegocio
             return objCapaDato.ExisteCarrito(idcliente, idproducto);
         }
 
-        public bool OperacionCarrito(int idcliente, int idproducto, bool sumar, out string Mensaje)
+        public bool OperacionCarrito(int idusuario, int idproducto, bool sumar, out string Mensaje)
         {
-            return objCapaDato.OperacionCarrito(idcliente, idproducto, sumar, out Mensaje);
+            return objCapaDato.OperacionCarrito(idusuario, idproducto, sumar, out Mensaje);
         }
 
-        public int CantidadEnCarrito(int idcliente)
+        public int CantidadEnCarrito(int idusuario)
         {
-            return objCapaDato.CantidadEnCarrito(idcliente);
+            return objCapaDato.CantidadEnCarrito(idusuario);
         }
 
-        public List<Carrito> ListarProducto(int idcliente)
+        public List<Carrito> ListarProducto(int idusuario)
         {
-            return objCapaDato.ListarProducto(idcliente);
+            return objCapaDato.ListarProducto(idusuario);
         }
 
-        public bool EliminarCarrito(int idcliente, int idproducto)
+        public bool EliminarCarrito(int idusuario, int idproducto)
         {
-            return objCapaDato.EliminarCarrito(idcliente, idproducto);
+            return objCapaDato.EliminarCarrito(idusuario, idproducto);
         }
     }
 }

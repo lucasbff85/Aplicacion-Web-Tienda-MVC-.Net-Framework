@@ -93,8 +93,8 @@ namespace CapaPresentacionTienda.Controllers
         [HttpPost]
         public JsonResult AgregarCarrito(int idproducto)
         {
-            int idcliente = ((Usuario)Session["Cliente"]).Id;
-            bool existe = new CN_Carrito().ExisteCarrito(idcliente, idproducto);
+            int idusuario = ((Usuario)Session["Usuario"]).Id;
+            bool existe = new CN_Carrito().ExisteCarrito(idusuario, idproducto);
             bool respuesta = false;
             string mensaje = string.Empty;
 
@@ -104,7 +104,7 @@ namespace CapaPresentacionTienda.Controllers
             }
             else
             {
-                respuesta = new CN_Carrito().OperacionCarrito(idcliente, idproducto, true, out mensaje);
+                respuesta = new CN_Carrito().OperacionCarrito(idusuario, idproducto, true, out mensaje);
             }
 
             return Json(new { respuesta = respuesta, mensaje = mensaje }, JsonRequestBehavior.AllowGet);
@@ -113,8 +113,8 @@ namespace CapaPresentacionTienda.Controllers
         [HttpGet]
         public JsonResult CantidadEnCarrito()
         {
-            int idcliente = ((Usuario)Session["Cliente"]).Id;
-            int cantidad = new CN_Carrito().CantidadEnCarrito(idcliente);
+            int idusuario = ((Usuario)Session["Usuario"]).Id;
+            int cantidad = new CN_Carrito().CantidadEnCarrito(idusuario);
 
             return Json(new { cantidad = cantidad }, JsonRequestBehavior.AllowGet);
 
@@ -123,11 +123,11 @@ namespace CapaPresentacionTienda.Controllers
         [HttpPost]
         public JsonResult ListarProductosCarrito()
         {
-            int idcliente = ((Usuario)Session["Cliente"]).Id;
+            int idusuario = ((Usuario)Session["Usuario"]).Id;
             List<Carrito> oLista = new List<Carrito>();
             bool conversion;
 
-            oLista = new CN_Carrito().ListarProducto(idcliente).Select(oc => new Carrito()
+            oLista = new CN_Carrito().ListarProducto(idusuario).Select(oc => new Carrito()
             {
                 oProducto = new Producto()
                 {
@@ -147,10 +147,10 @@ namespace CapaPresentacionTienda.Controllers
         [HttpPost]
         public JsonResult OperacionCarrito(int idproducto, bool sumar)
         {
-            int idcliente = ((Usuario)Session["Cliente"]).Id;
+            int idusuario = ((Usuario)Session["Usuario"]).Id;
             bool respuesta = false;
             string mensaje = string.Empty;
-            respuesta = new CN_Carrito().OperacionCarrito(idcliente, idproducto, sumar, out mensaje);
+            respuesta = new CN_Carrito().OperacionCarrito(idusuario, idproducto, sumar, out mensaje);
 
 
             return Json(new { respuesta = respuesta, mensaje = mensaje }, JsonRequestBehavior.AllowGet);
@@ -160,11 +160,11 @@ namespace CapaPresentacionTienda.Controllers
         [HttpPost]
         public JsonResult EliminarCarrito(int idproducto)
         {
-            int idcliente = ((Usuario)Session["Cliente"]).Id;
+            int idusuario = ((Usuario)Session["Usuario"]).Id;
             bool respuesta = false;
             string mensaje = string.Empty;
 
-            respuesta = new CN_Carrito().EliminarCarrito(idcliente, idproducto);
+            respuesta = new CN_Carrito().EliminarCarrito(idusuario, idproducto);
             return Json(new { respuesta = respuesta, mensaje = mensaje }, JsonRequestBehavior.AllowGet);
         }
 
@@ -268,7 +268,7 @@ namespace CapaPresentacionTienda.Controllers
             };
 
             oVenta.MontoTotal = total;
-            oVenta.IdUsuario = ((Usuario)Session["Cliente"]).Id;
+            oVenta.IdUsuario = ((Usuario)Session["Usuario"]).Id;
 
             TempData["Venta"] = oVenta;
             TempData["DetalleVenta"] = detalle_venta;
@@ -316,7 +316,7 @@ namespace CapaPresentacionTienda.Controllers
         [Authorize]
         public ActionResult MisCompras()  //es un action result porque va a devolver una vista
         {
-            int idcliente = ((Usuario)Session["Cliente"]).Id;
+            int idcliente = ((Usuario)Session["Usuario"]).Id;
             List<DetalleVenta> oLista = new List<DetalleVenta>();
             bool conversion;
 

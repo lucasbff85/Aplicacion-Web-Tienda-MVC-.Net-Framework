@@ -8,7 +8,7 @@ namespace CapaEntidad
 {
     public class Carrito
     {
-        public int IdCarrito { get; set; }
+        public int Id { get; set; }
 
         public Usuario oCliente { get; set; }
 
