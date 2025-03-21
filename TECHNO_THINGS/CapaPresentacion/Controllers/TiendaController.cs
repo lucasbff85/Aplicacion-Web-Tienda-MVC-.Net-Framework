@@ -13,6 +13,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Services.Description;
 using CapaPresentacionTienda.Filter;
+using DocumentFormat.OpenXml.Math;
 
 namespace CapaPresentacionTienda.Controllers
 {
@@ -186,7 +187,7 @@ namespace CapaPresentacionTienda.Controllers
             return Json(new { lista = oLista }, JsonRequestBehavior.AllowGet);
         }
 
-      
+        
 
         [ValidarSession]
         [Authorize]

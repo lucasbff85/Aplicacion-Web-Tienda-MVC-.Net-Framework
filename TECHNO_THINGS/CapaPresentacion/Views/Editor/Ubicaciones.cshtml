@@ -1,0 +1,599 @@
+﻿
+@{
+    ViewBag.Title = "Ubicaciones";
+    Layout = "~/Views/Shared/VistaAdministrador.cshtml";
+}
+
+
+
+<ol class="breadcrumb mb-4 mt-4">
+    <li class="breadcrumb-item"><a href="index.html">Resumen</a></li>
+    <li class="breadcrumb-item active">Provincias</li>
+</ol>
+
+
+@*TABLA PROVINCIA*@
+
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-users me-1"></i> Lista de Provincias
+
+
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12">
+                <button type="button" class="btn btn-success" onclick="abrirModalP(null)">Agregar Provincia</button>
+            </div>
+        </div>
+
+        <hr />
+        <h3>Tabla Provincias</h3>
+        <br />
+        <table id="tablaProvincias" class="display cell-border mb-3" style="width: 100%">
+            <thead>
+                <tr>
+                    <th>Provincia</th>
+                    <th></th>
+
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+
+@*TABLA CIUDADES*@
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-users me-1"></i> Lista de Ciudades
+
+
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12">
+                <button type="button" class="btn btn-success" onclick="abrirModalC(null)">Agregar Ciudad</button>
+            </div>
+        </div>
+
+        <hr />
+        <h3>Tabla Ciudades</h3>
+        <br />
+        <table id="tablaCiudades" class="display cell-border mb-3" style="width: 100%">
+            <thead>
+                <tr>
+                    <th>Ciudad</th>
+                    <th>Provincia</th>
+                    <th>CP</th>
+                    <th></th>
+
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<!-- Modal PROVINCIAS -->
+<div class="modal fade" id="FormModalP" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title" id="exampleModalLabel">Provincia</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <input id="txtIdP" type="hidden" value="0" />
+
+
+                <div class="row g-2">
+
+                    <div class="col-sm-6">
+                        <label for="txtNombreProvincia" class="form-label">Provincia</label>
+                        <input type="text" class="form-control" id="txtNombreProvincia" autocomplete="off">
+                    </div>
+                </div>
+
+
+
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <div id="mensajeError" class="alert alert-danger" role="alert">
+                            This is a danger alert—check it out!
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="GuardarP()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal CIUDADES---------------------------->
+<div class="modal fade" id="FormModalC" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title" id="exampleModalLabel">Ciudad</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <input id="txtIdC" type="hidden" value="0" />
+
+
+                <div class="row g-2">
+
+                    <div class="col-sm-6">
+                        <label for="txtNombreCiudad" class="form-label">Ciudad</label>
+                        <input type="text" class="form-control" id="txtNombreCiudad" autocomplete="off">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label for="txtCP" class="form-label">Código Postal</label>
+                        <input type="text" class="form-control" id="txtCP" autocomplete="off">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label for="cboProvincia" class="form-label">Provincia</label>
+                        <select id="cboProvincia" class="form-select">
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <div id="mensajeErrorC" class="alert alert-danger" role="alert">
+                            This is a danger alert—check it out!
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="GuardarC()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts{
+    <script>
+
+        var tabladataP;
+        var filaSeleccionadaP;
+        var IdProvinciaSeleccionada;
+        var tabladataC;
+        var filaSeleccionadaC;
+
+        //CARGAR LAS PROVINCIAS A LA TABLA
+            tabladataP = $("#tablaProvincias").DataTable({
+                responsive: true,
+                ordering: false,
+                "ajax": {
+                    url: '@Url.Action("ListarProvincias", "Editor")',
+                    type: "POST",
+                    dataType: "json"
+                },
+                "columns": [
+                    { "data": "Descripcion" },
+                    {
+                        "defaultContent": '<button type="button" class="btn btn-primary btn-sm btn-editar"> <i class="fas fa-pen me-1"></i></button>' +
+                            '<button type="button" class="btn btn-danger btn-sm ms-2 btn-eliminar"> <i class="fas fa-trash me-1"></i></button>',
+                        "orderable": false,  //que esa columna no sea ordenada de mayor a menor porque solo contiene botones
+                        "searchable": false, //que no se involucre en los filtros
+                        "width": "90px"
+                    }
+
+                ],
+                "language": {
+                    "url":"https://cdn.datatables.net/plug-ins/2.1.8/i18n/es-ES.json"
+                }
+            });
+
+
+
+                   //CARGAR LAS CIUDADES
+            tabladataC = $("#tablaCiudades").DataTable({
+                responsive: true,
+                ordering: false,
+                "ajax": {
+                    url: '@Url.Action("ListarCiudades", "Editor")',
+                    type: "POST",
+                    dataType: "json"
+                },
+                "columns": [
+                    { "data": "Descripcion" },
+                    { "data": "oProvincia.Descripcion" },
+                    { "data": "CP" },
+                    {
+                        "defaultContent": '<button type="button" class="btn btn-primary btn-sm btn-editar"> <i class="fas fa-pen me-1"></i></button>' +
+                            '<button type="button" class="btn btn-danger btn-sm ms-2 btn-eliminar"> <i class="fas fa-trash me-1"></i></button>',
+                        "orderable": false,  //que esa columna no sea ordenada de mayor a menor porque solo contiene botones
+                        "searchable": false, //que no se involucre en los filtros
+                        "width": "90px"
+                    }
+
+                ],
+                "language": {
+                    "url":"https://cdn.datatables.net/plug-ins/2.1.8/i18n/es-ES.json"
+                }
+            });
+
+
+        //CARGAR EL CBO PROVINCIAS
+         function ListarComboProvincias(selectedValue, callback) {
+             // Vaciar opciones previas y añadir la opción por defecto
+             $("#cboProvincia").empty();
+             $("<option>").attr({ "value": "00", "disabled":"disabled", "selected":"true" }).text("Seleccionar").appendTo("#cboProvincia")
+
+             jQuery.ajax({
+                 url: '@Url.Action("ListarProvincias","Editor")',
+                 type: "POST",
+                 dataType: "json",
+                 contentType: "application/json; charset=utf-8",
+                 success: function (data) {
+
+                     if (data.data != null) {
+                         $.each(data.data, function (i, item) {
+                             $("<option>").attr({"value":item.Id}).text(item.Descripcion).appendTo("#cboProvincia")
+                         })
+
+                     }
+
+                     // Establecer el valor seleccionado si se pasa un selectedValue
+                     if (selectedValue) {
+                         $("#cboProvincia").val(selectedValue);
+                     }
+
+                     // Ejecutar el callback si existe
+                     if (callback) callback();
+                 },
+                 error: function (xhr, status, error) {
+                     console.error("Error al cargar provincias: " + error);
+                 }
+             })
+
+         }
+
+
+        //----------------MODAL PROVINCIAS-------------------
+
+        function abrirModalP(json) {   //recibe objeto formato json, tambien puede ir otro nombre como data
+
+            //limpiar datos
+            $("#txtIdP").val(0);
+            $("#txtNombreProvincia").val("");
+            $("#mensajeError").hide();
+
+
+            if (json != null) {
+                $("#txtIdP").val(json.Id);
+                $("#txtNombreProvincia").val(json.Descripcion);
+
+            }
+
+
+
+            $("#FormModalP").modal("show");
+        }
+
+        $("#tablaProvincias tbody").on("click", '.btn-editar', function () {
+
+
+            //$(this) hace referencia a la tabla misma, que es con la que trabajamos
+            filaSeleccionadaP = $(this).closest("tr");  //la fila seleccionada con el boton editar
+            var data = tabladataP.row(filaSeleccionadaP).data();
+            IdProvinciaSeleccionada = data.Id;
+
+
+            abrirModalP(data)
+
+        })
+
+        $("#tablaProvincias tbody").on("click", '.btn-eliminar', function () {
+
+            var provinciaSeleccionada = $(this).closest("tr");
+
+            var data = tabladataP.row(provinciaSeleccionada).data();
+
+
+            //ver documentacion de sweet alert...
+            swal({
+                title: "Está seguro?",
+                text: "Desea eliminar la provincia?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-primary",
+                confirmButtonText: "Si",
+                cancelButtonText: "No",
+                closeOnConfirm: true
+            },
+            function () {
+               jQuery.ajax({
+                   url: '@Url.Action("EliminarProvincia","Editor")',
+                   type: "POST",
+                   data: JSON.stringify({ id: data.Id }),
+                   dataType: "json",
+                   contentType: "application/json; charset=utf-8",
+                   success: function (data) {  //este data es distinto, almacena la respuesta de eliminar usuario de HomeController
+
+                       if (data.resultado) {
+
+                           tabladataP.row(provinciaSeleccionada).remove().draw();
+                           //tabladata.ajax.reload(null, false); para recargar desde el servidor
+
+                       } else {
+                            swal("No se pudo eliminar", data.mensaje, "error")
+                       }
+
+
+                   },
+                   error: function (error) {
+                       console.log(error)
+                   }
+
+               });
+            });
+
+        });
+
+        function GuardarP() {
+            var Provincia = {
+                Id: $("#txtIdP").val(),
+                Descripcion: $("#txtNombreProvincia").val()
+            }
+
+
+            jQuery.ajax({
+                url: '@Url.Action("GuardarProvincia","Editor")',
+                type: "POST",
+                //convierte el valor a texto
+                data: JSON.stringify({ objeto: Provincia }),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                //el ajax tiene estos tres metodos:
+                success: function (data) {
+
+                    $(".modal-body").LoadingOverlay("hide");
+
+                    //PROVINCIA NUEVA
+                    if (Provincia.Id == 0) {
+
+                        if (data.resultado != 0) {
+                            Provincia.Id = data.resultado;
+                            tabladataP.row.add(Provincia).draw(false);
+                            $("#FormModalP").modal("hide");
+                        } else {
+                            $("#mensajeError").text(data.mensaje);
+                            $("#mensajeError").show();
+                        }
+
+
+
+                    } else {
+                        //PROVINCIA EDITAR
+                        //con editar, data.resultado es un booleano
+                        if (data.resultado) {
+                            tabladataP.row(filaSeleccionadaP).data(Provincia).draw(false);
+                            //filaSeleccionadaP = null;
+                            $("#FormModalP").modal("hide");
+                        } else {
+                            $("#mensajeError").text(data.mensaje);
+                            $("#mensajeError").show();
+                        }
+
+
+
+                    }
+                },
+                error: function (error) {
+                    $(".modal-body").LoadingOverlay("hide");
+                    $("#mensajeError").text("Error ajax");
+                    $("#mensajeError").show();
+                },
+                beforeSend: function () {
+                    //mostramos algo mientras se lleva a cabo la operacion
+                    $(".modal-body").LoadingOverlay("show", {
+                        imageResizeFactor: 2,   //tamaño de la img
+                        text: "Cargando...",
+                        size: 14    //tamaño del texto
+                    })
+                },
+            });
+
+        }
+
+
+        //-----------------------MODAL CIUDADES-------------
+
+
+         function abrirModalC(json) {   //recibe objeto formato json, tambien puede ir otro nombre como data
+
+
+             //limpiar datos
+             $("#txtIdC").val(0);
+             $("#txtNombreCiudad").val("");
+             $("#txtCP").val("");
+             //ListarComboProvincias();
+             $("#mensajeErrorC").hide();
+
+
+             //if (json != null) {
+             //    $("#txtIdC").val(json.Id);
+             //    $("#txtNombreCiudad").val(json.Descripcion);
+             //    $("#cboProvincia").val(json.oProvincia.Id);
+             //    //$("#cboProvincia").text(json.oProvincia.Descripcion);
+             //    $("#txtCP").val(json.CP);
+
+             //}
+
+             // Llamar a ListarComboProvincias con el ID de la provincia seleccionada
+             if (json != null) {
+                 ListarComboProvincias(json.oProvincia.Id, function () {
+                     $("#txtIdC").val(json.Id);
+                     $("#txtNombreCiudad").val(json.Descripcion);
+                     $("#txtCP").val(json.CP);
+                 });
+             } else {
+                 // Si no hay datos, solo cargar el combo
+                 ListarComboProvincias(null);
+             }
+
+
+             $("#FormModalC").modal("show");
+         }
+
+         $("#tablaCiudades tbody").on("click", '.btn-editar', function () {
+
+
+             //$(this) hace referencia a la tabla misma, que es con la que trabajamos
+             filaSeleccionadaC = $(this).closest("tr");  //la fila seleccionada con el boton editar
+             var data = tabladataC.row(filaSeleccionadaC).data();
+
+             abrirModalC(data)
+         })
+
+         $("#tablaCiudades tbody").on("click", '.btn-eliminar', function () {
+
+             filaSeleccionadaC = $(this).closest("tr");
+
+             var data = tabladataC.row(filaSeleccionadaC).data();
+
+             //ver documentacion de sweet alert...
+             swal({
+                 title: "Está seguro?",
+                 text: "Desea eliminar la ciudad?",
+                 type: "warning",
+                 showCancelButton: true,
+                 confirmButtonClass: "btn-primary",
+                 confirmButtonText: "Si",
+                 cancelButtonText: "No",
+                 closeOnConfirm: true
+             },
+             function () {
+                jQuery.ajax({
+                    url: '@Url.Action("EliminarCiudad","Editor")',
+                    type: "POST",
+                    data: JSON.stringify({ id: data.Id }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {  //este data es distinto, almacena la respuesta de eliminar usuario de HomeController
+
+                        if (data.resultado) {
+
+                            tabladataC.row(filaSeleccionadaC).remove().draw();
+                            //tabladata.ajax.reload(null, false); para recargar desde el servidor
+
+                        } else {
+                             swal("No se pudo eliminar", data.mensaje, "error")
+                        }
+
+
+                    },
+                    error: function (error) {
+                        console.log(error)
+                    }
+
+                });
+             });
+
+         });
+
+        function GuardarC() {
+            var Ciudad = {
+                Id: $("#txtIdC").val(),
+                Descripcion: $("#txtNombreCiudad").val(),
+                oProvincia: { Id: $("#cboProvincia").val(), Descripcion: $("#cboProvincia").text() },
+                CP: $("#txtCP").val()
+             }
+
+
+
+             jQuery.ajax({
+                 url: '@Url.Action("GuardarCiudad","Editor")',
+                 type: "POST",
+                 //convierte el valor a texto
+                 data: JSON.stringify({ objeto: Ciudad }),
+                 dataType: "json",
+                 contentType: "application/json; charset=utf-8",
+                 //el ajax tiene estos tres metodos:
+                 success: function (data) {
+
+                     $(".modal-body").LoadingOverlay("hide");
+
+                     //CIUDAD NUEVA
+                     if (Ciudad.Id == 0) {
+
+                         if (data.resultado != 0) {
+                             Ciudad.Id = data.resultado;
+                             tabladataC.row.add(Ciudad).draw(false);
+                             $("#FormModalC").modal("hide");
+                         } else {
+                             $("#mensajeError").text(data.mensaje);
+                             $("#mensajeErrorC").show();
+                         }
+
+
+
+                     } else {
+                         //CIUDAD EDITAR
+                         //con editar, data.resultado es un booleano
+                         if (data.resultado) {
+                             tabladataC.row.add(Ciudad).draw(false);
+                             filaSeleccionadaC = null;
+                             $("#FormModalC").modal("hide");
+                         } else {
+                             $("#mensajeErrorC").text(data.mensaje);
+                             $("#mensajeErrorC").show();
+                         }
+
+                     }
+                     tabladataC.ajax.reload(null, false); // Recarga la tabla sin cambiar de página
+
+                 },
+                 error: function (error) {
+                     $(".modal-body").LoadingOverlay("hide");
+                     $("#mensajeErrorC").text("Error ajax");
+                     $("#mensajeErrorC").show();
+                 },
+                 beforeSend: function () {
+                     //mostramos algo mientras se lleva a cabo la operacion
+                     $(".modal-body").LoadingOverlay("show", {
+                         imageResizeFactor: 2,   //tamaño de la img
+                         text: "Cargando...",
+                         size: 14    //tamaño del texto
+                     })
+                 },
+             });
+
+         }
+
+    </script>
+}
+
+
+

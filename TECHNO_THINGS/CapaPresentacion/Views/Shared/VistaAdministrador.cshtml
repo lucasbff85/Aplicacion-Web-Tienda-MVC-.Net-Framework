@@ -11,7 +11,7 @@
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="index.html">Mi Tienda</a>
+        <a class="navbar-brand ps-4 m-lg-2 elemento" href="@Url.Action("Index","Editor")">Mi Tienda</a>
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
 
@@ -19,9 +19,9 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#!">Correo del Usuario</a></li>
+                    <li><a class="dropdown-item elemento" onclick="abrirModal()" href="#!">Correo del Usuario</a></li>
                     <li><hr class="dropdown-divider" /></li>
-                    <li><a class="dropdown-item" href="@Url.Action("CerrarSesion","Acceso")">Cerrar sesión</a></li>
+                    <li><a class="dropdown-item elemento" href="@Url.Action("CerrarSesion","Acceso")">Cerrar sesión</a></li>
                 </ul>
             </li>
         </ul>
@@ -32,25 +32,25 @@
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Resumen</div>
-                        <a class="nav-link" href="@Url.Action("Index","Editor")">
+                        <a class="nav-link elemento" href="@Url.Action("Ubicaciones","Editor")">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                            Dashboard
+                            Ubicaciones
                         </a>
-                        <a class="nav-link" href="@Url.Action("Usuarios","Editor")">
+                        <a class="nav-link elemento" href="@Url.Action("Usuarios","Editor")">
                             <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                             Usuarios
                         </a>
 
                         <div class="sb-sidenav-menu-heading">Mantenimiento</div>
-                        <a class="nav-link" href="@Url.Action("Categoria","Editor")">
+                        <a class="nav-link elemento" href="@Url.Action("Categoria","Editor")">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                             Categorias
                         </a>
-                        <a class="nav-link" href="@Url.Action("Marca","Editor")">
+                        <a class="nav-link elemento" href="@Url.Action("Marca","Editor")">
                             <div class="sb-nav-link-icon"><i class="fas fa-bookmark"></i></div>
                             Marcas
                         </a>
-                        <a class="nav-link" href="@Url.Action("Producto","Editor")">
+                        <a class="nav-link elemento" href="@Url.Action("Producto","Editor")">
                             <div class="sb-nav-link-icon"><i class="fas fa-boxes"></i></div>
                             Productos
                         </a>
@@ -83,11 +83,161 @@
         </div>
     </div>
 
-    @*<li>@Html.ActionLink("Inicio Pagina", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-        <li>@Html.ActionLink("Acerca de test", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-        <li>@Html.ActionLink("Contacto", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-        <li>@Html.ActionLink("Pagina de pruebas", "PaginaTest", "Home", new { area = "" }, new { @class = "nav-link" })</li>*@
+    <!-- Modal------data-bs-backdrow=static para que no se cierre si toco afuera -->
+    <div class="modal fade" id="FormModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-dark text-white">
+                    <h5 class="modal-title" id="exampleModalLabel">Usuario</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
 
+                    <input id="txtId" type="hidden" value="0" />
+
+
+                    <div class="row g-2">
+
+                        <div class="col-sm-6">
+                            <label for="txtnombre" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="txtnombre" autocomplete="off">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label for="txtapellido" class="form-label">Apellido</label>
+                            <input type="text" class="form-control" id="txtapellido" autocomplete="off">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label for="txtcorreo" class="form-label">Correo</label>
+                            <input type="text" class="form-control" id="txtcorreo" autocomplete="off" readonly>
+                        </div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col-12">
+                            <div id="mensajeError" class="alert alert-danger" role="alert">
+                                This is a danger alert—check it out!
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" onclick="Guardar()">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    
+    <script>
+        var editado = false;
+        var UsuarioEditado = {
+            Nombre:"",
+            Apellido:""
+        }
+
+        var Usuario = {
+        Id: "@(Session["Usuario"] != null ? ((dynamic)Session["Usuario"]).Id : "")",
+        Nombre: "@(Session["Usuario"] != null ? ((dynamic)Session["Usuario"]).Nombre : "")",
+        Apellido: "@(Session["Usuario"] != null ? ((dynamic)Session["Usuario"]).Apellido : "")",
+        Correo: "@(Session["Usuario"] != null ? ((dynamic)Session["Usuario"]).Correo : "")"
+        };
+        console.log(Usuario);
+        console.log(UsuarioEditado);
+
+            //CARGAR DATOS DEL USUARIO
+            function abrirModal() {
+            $("#txtId").val(Usuario.Id);
+            $("#txtcorreo").val(Usuario.Correo);
+            $("#mensajeError").hide();
+                if (editado) {
+                    $("#txtnombre").val(UsuarioEditado.Nombre);
+                    $("#txtapellido").val(UsuarioEditado.Apellido);
+                } else {
+                    $("#txtnombre").val(Usuario.Nombre);
+                    $("#txtapellido").val(Usuario.Apellido);
+                }    
+                
+
+
+
+            // Mostrar el modal
+            $("#FormModal").modal("show");
+
+            }
+
+
+
+
+
+        function Guardar() {
+
+
+
+            Usuario.Id = $("#txtId").val();
+            Usuario.Nombre = $("#txtnombre").val();
+            Usuario.Apellido = $("#txtapellido").val();
+            Usuario.Correo = $("#txtcorreo").val();
+
+            jQuery.ajax({
+                 url: '@Url.Action("GuardarUsuario","Editor")',
+                 type: "POST",
+                 //convierte el valor a texto
+                 data: JSON.stringify({ objeto: Usuario }),
+                 dataType: "json",
+                 contentType: "application/json; charset=utf-8",
+                 //el ajax tiene estos tres metodos:
+                 success: function (data) {
+
+                 $(".modal-body").LoadingOverlay("hide");
+
+                 if (data.resultado) {
+                     swal("", "Editado con éxito", "success");
+                     $("#FormModal").modal("hide");
+
+                     editado = true;
+                     UsuarioEditado.Nombre = $("#txtnombre").val();
+                     UsuarioEditado.Apellido = $("#txtapellido").val();
+
+                 } else {
+                     $("#mensajeError").text(data.mensaje);
+                     $("#mensajeError").show();
+                 }
+
+                 },
+                 error: function (error) {
+                     $(".modal-body").LoadingOverlay("hide");
+                     $("#mensajeError").text("Error ajax");
+                     $("#mensajeError").show();
+                 },
+                 beforeSend: function () {
+                     //mostramos algo mientras se lleva a cabo la operacion
+                     $(".modal-body").LoadingOverlay("show", {
+                         imageResizeFactor: 2,   //tamaño de la img
+                         text: "Cargando...",
+                         size: 14    //tamaño del texto
+                     })
+                 },
+            });
+
+
+
+        }
+
+
+    </script>
+
+
+    
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/complementos")

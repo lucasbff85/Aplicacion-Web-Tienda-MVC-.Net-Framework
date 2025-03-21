@@ -176,6 +176,8 @@ namespace CapaPresentacion.Controllers
 
         public ActionResult CerrarSesion()
         {
+            Session["Usuario"] = null;
+
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Tienda");
 

@@ -1,0 +1,118 @@
+﻿.table td {
+    white-space: nowrap; /* Previene saltos de línea */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Añade puntos suspensivos */
+    max-width: 200px; /* Establece un ancho máximo para las celdas */
+    font-size: 0.95rem; /* Ajusta el tamaño de la fuente por defecto */
+    display: inline-block; /* Asegura que respete los límites del contenedor padre */
+
+}
+
+
+.elemento {
+    transition: transform 0.25s ease; /* Suaviza la transición */
+    max-width: 80%; /* Evita que sobrepase su contenedor */
+}
+
+    .elemento:hover {
+        transform: scale(1.18); /* Escala al 110% del tamaño original */
+        font-size: 1rem; /* Aumenta un poco el tamaño del texto */
+        cursor: pointer; /* Cambia el cursor a un puntero */
+        box-shadow: none;
+    }
+
+
+.navbar-nav {
+    height: 55px; /* Ajusta la altura del navbar */
+    display: flex;
+    align-items: center; /* Centra verticalmente los elementos */
+}
+
+.nav-item {
+    position: relative;
+}
+
+.dropdown-menu {
+    min-width: 200px; /* Ajusta el tamaño del dropdown */
+    text-align: center;
+    padding: 0.75rem 1rem; /* Más espacio dentro del menú */
+    overflow: hidden; /* Asegura que no haya desbordamiento */
+}
+
+.dropdown li {
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+    padding: 0.5rem 1rem; /* Ajusta el padding */
+}
+
+.dropdown-item elemento {
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+    font-size: 0.9rem; /* Ajusta el tamaño de la fuente */
+    padding: 0.5rem 1rem; /* Ajusta el padding */
+    box-shadow: none !important; /* Elimina cualquier sombra */
+    background-color: transparent !important; /* Asegura que no tenga fondo */
+}
+
+.dropdown-item:hover {
+    font-size: 1rem; /* Aumenta un poco el texto al hacer hover */
+}
+
+.nav-link {
+    padding: 10px 18px; /* Ajusta el espacio dentro del navbar */
+
+}
+
+
+
+
+
+
+
+
+.dropdown-menu {
+    text-align: center; /* Asegura que el texto esté centrado */
+    align-items: center;
+    width: max-content; /* Se ajusta al contenido */
+    max-width: 100%; /* Evita que sobrepase su contenedor */
+    padding: 0.5rem 1rem; /* Ajusta el padding */
+}
+
+
+    .dropdown-menu .dropdown-item {
+        white-space: nowrap; /* Evita que el texto se desborde en varias líneas */
+        overflow: hidden; /* Oculta el desbordamiento */
+        max-width: 250px; /* Ajusta el ancho máximo del elemento */
+        padding: 1.5rem 2rem; /* Ajusta el espacio interior para alinearlo mejor */
+        font-size: 12px; /* Reduce el tamaño de la fuente */
+        white-space: normal; /* Asegura que el texto se ajuste dentro del contenedor */
+        line-height: 1.2; /* Reduce el espacio vertical entre líneas */
+    }
+
+
+    .dropdown-menu .elemento {
+        display: block;
+        padding: 0.5rem 1rem; /* Espaciado uniforme */
+    }
+
+.dropdown-menu {
+    display: none; /* Inicialmente oculto */
+}
+
+.show {
+    display: block !important; /* Se muestra cuando Bootstrap lo activa */
+}
+
+
+/*.navbar-brand {
+    transition: transform 0.25s ease-in-out !important;
+    transform-origin: left center !important;*/ /* Crece desde la izquierda */
+/*}
+
+    .navbar-brand:hover {
+        transform: scale(1.25) translateX(-10%)!important;
+    }
+
+
+
+    .navbar-brand:hover {
+        background-color: red !important;
+    }*/

@@ -156,7 +156,7 @@
 
                                     //columna 3
                                     $("<div>").addClass("col-sm-2 align-self-center").append(
-                                        $("<span>").text(item.oProducto.Precio.toFixed(2) + "USD")
+                                        $("<span>").text("$ "+item.oProducto.Precio.toLocaleString('es-AR'))
                                     ),
 
                                     //columna 4
@@ -222,7 +222,11 @@
 
         }
 
-        $("#cbodepartamento").on("change", function () {
+       
+
+
+
+        $("#cboprovincia").on("change", function () {
             ListarCiudades();
         })
 
@@ -242,7 +246,7 @@
 
                     if (data.lista != null) {
                         $.each(data.lista, function (i, item) {
-                            $("<option>").attr({"value":item.Id}).text(item.Descripcion).appendTo("#cbociudad")
+                            $("<option>").attr({ "value": item.Id }).text(item.Descripcion).appendTo("#cbociudad")
                         })
 
                     }
@@ -261,7 +265,7 @@
                 var subtotal = precio * cantidad;
                 sumaTotal += subtotal;
             })
-            $("#total").text(sumaTotal.toFixed(2))
+            $("#total").text(sumaTotal.toLocaleString('es-AR'))    
             $("#total").data("sumaTotal", sumaTotal)  //creamos una data
 
         }

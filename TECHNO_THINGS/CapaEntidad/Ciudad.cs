@@ -12,7 +12,7 @@ namespace CapaEntidad
 
         public string Descripcion { get; set; }
 
-        public int IdProvincia { get; set; }
+        public Provincia oProvincia { get; set; }
 
         public string CP { get; set; }
     }

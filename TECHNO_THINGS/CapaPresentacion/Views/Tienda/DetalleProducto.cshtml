@@ -14,7 +14,8 @@
                 <div class="small mb-1">Marca: @Html.DisplayTextFor(m => m.oMarca.Descripcion)</div>
                 <h1 class="display-5 fw-bolder">@Html.DisplayTextFor(m => m.Nombre)</h1>
                 <div class="fs-5 mb-5">
-                    <span>@Html.DisplayTextFor(m => m.Precio) USD</span>
+                    <span>$ @Model.Precio.ToString("N2", System.Globalization.CultureInfo.CreateSpecificCulture("es-AR"))</span>
+
                 </div>
                 <p class="lead">@Html.DisplayTextFor(m => m.Descripcion)</p>
                 <div class="d-flex">
@@ -22,7 +23,7 @@
                         <i class="fas fa-undo-alt"></i>Volver
                     </a>
 
-                    @if (Session["Cliente"] != null)
+                    @if (Session["Usuario"] != null)
                     {
                         <button class="btn btn-success agregarcarrito flex-shrink-0 w-50" type="button" data-idproducto="@Html.DisplayTextFor(m => m.Id)">
                             <i class="fas fa-cart-plus"></i>Agregar al carrito

@@ -9,6 +9,9 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using CapaDatos;
+using System.Data;
+using ClosedXML.Excel;
 
 namespace CapaPresentacion.Controllers
 {
@@ -20,6 +23,11 @@ namespace CapaPresentacion.Controllers
         }
 
         public ActionResult Dashboard()
+        {
+            return View();
+        }
+
+        public ActionResult Ubicaciones()
         {
             return View();
         }
@@ -43,6 +51,100 @@ namespace CapaPresentacion.Controllers
             return View();
         }
 
+        //---------------------------UBICACIONES----------------------
+        #region UBICACIONES
+
+
+
+        [HttpPost]
+        public JsonResult ListarProvincias()
+        {
+            List<Provincia> oLista = new List<Provincia>();
+            oLista = new CN_Ubicacion().ListarProvincias();
+            return Json(new { data = oLista }, JsonRequestBehavior.AllowGet);
+        }
+
+
+        //[HttpPost]
+        //public JsonResult ListarProvincias()
+        //{
+        //    List<Provincia> oLista = new List<Provincia>();
+        //    oLista = new CN_Ubicacion().ListarProvincias();
+
+        //    return Json(new { lista = oLista }, JsonRequestBehavior.AllowGet);
+        //}
+
+
+
+        [HttpPost]
+        public JsonResult ListarCiudades()
+        {
+            List<Ciudad> oLista = new List<Ciudad>();
+            oLista = new CN_Ubicacion().ListarCiudades();
+            return Json(new { data = oLista }, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
+        [HttpPost]
+        public JsonResult GuardarProvincia(Provincia objeto)
+        {
+            object resultado;
+            string mensaje = string.Empty;
+
+            if (objeto.Id == 0)
+            {
+                resultado = new CN_Ubicacion().RegistrarProvincia(objeto, out mensaje);
+
+            }
+            else
+            {
+                resultado = new CN_Ubicacion().EditarProvincia(objeto, out mensaje);
+            }
+            return Json(new { resultado = resultado, mensaje = mensaje }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult EliminarProvincia(int id)
+        {
+            bool resultado = false;
+            string mensaje = string.Empty;
+
+            resultado = new CN_Ubicacion().EliminarProvincia(id, out mensaje);
+            return Json(new { resultado = resultado, mensaje = mensaje }, JsonRequestBehavior.AllowGet);
+        }
+
+
+        [HttpPost]
+        public JsonResult GuardarCiudad(Ciudad objeto)
+        {
+            object resultado;
+            string mensaje = string.Empty;
+
+            if (objeto.Id == 0)
+            {
+                resultado = new CN_Ubicacion().RegistrarCiudad(objeto, out mensaje);
+
+            }
+            else
+            {
+                resultado = new CN_Ubicacion().EditarCiudad(objeto, out mensaje);
+            }
+            return Json(new { resultado = resultado, mensaje = mensaje }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult EliminarCiudad(int id)
+        {
+            bool resultado = false;
+            string mensaje = string.Empty;
+
+            resultado = new CN_Ubicacion().EliminarCiudad(id, out mensaje);
+            return Json(new { resultado = resultado, mensaje = mensaje }, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion
 
         //---------------------------CATEGORIA--------------------------
 
@@ -304,5 +406,83 @@ namespace CapaPresentacion.Controllers
 
         #endregion
 
+
+        //---------------------------REPORTES---------------------
+        #region REPORTES
+
+
+        [HttpGet]
+        public JsonResult ListaReporte(string fechainicio, string fechafin, string idtransaccion)
+        {
+            List<Reporte> oLista = new List<Reporte>();
+
+            oLista = new CN_Reporte().Ventas(fechainicio, fechafin, idtransaccion);
+            return Json(new { data = oLista }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public FileResult ExportarVenta(string fechainicio, string fechafin, string idtransaccion)
+        {
+            List<Reporte> oLista = new List<Reporte>();
+            oLista = new CN_Reporte().Ventas(fechainicio, fechafin, idtransaccion);
+
+            DataTable dt = new DataTable();
+
+            //le asignamos la cultura de la region
+            dt.Locale = new CultureInfo("es-AR");
+
+            dt.Columns.Add("Fecha Venta", typeof(string));
+            dt.Columns.Add("Cliente", typeof(string));
+            dt.Columns.Add("Producto", typeof(string));
+            dt.Columns.Add("Precio", typeof(decimal));
+            dt.Columns.Add("Cantidad", typeof(int));
+            dt.Columns.Add("Total", typeof(decimal));
+            dt.Columns.Add("Id Transacción", typeof(string));
+
+            foreach (Reporte rp in oLista)
+            {
+                dt.Rows.Add(new object[]
+                {
+                    rp.FechaVenta,
+                    rp.Cliente,
+                    rp.Producto,
+                    rp.Precio,
+                    rp.Cantidad,
+                    rp.Total,
+                    rp.IdTransaccion
+                });
+            }
+
+            dt.TableName = "Datos";
+
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+
+                wb.Worksheets.Add(dt);
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    //guardamos el documento
+                    wb.SaveAs(stream);
+
+                    //ahora le damos como parametros: ruta del archivo, tipo de archivo (archivo de excel), nombre de archivo :
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "ReporteVenta" + DateTime.Now.ToString() + ".xlsx");
+                    //stream.ToArray() es donde esta almacenado el archivo
+                    //"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" para especificar que es un archivo excel
+                    // "ReporteVenta" + DateTime.Now.ToString() + ".xlsx"  es el nombre del archivo
+                }
+
+            }
+        }
+
+
+        [HttpGet]
+        public JsonResult VistaDashBoard()
+        {
+            DashBoard objeto = new CN_Reporte().VerDashBoard();
+            return Json(new { resultado = objeto }, JsonRequestBehavior.AllowGet);
+        }
+
+
+        #endregion
     }
 }

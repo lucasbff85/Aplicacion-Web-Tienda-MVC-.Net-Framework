@@ -18,6 +18,7 @@ namespace CapaPresentacion
                         "~/Scripts/loadingoverlay.min.js",
                         "~/Scripts/sweetalert.min.js",
                         "~/Scripts/jquery.validate.js",
+                        "~/Scripts/jquery-ui-1.14.1.js",
                          "~/Scripts/scriptsAdmin.js"));
 
 
@@ -28,7 +29,10 @@ namespace CapaPresentacion
                       "~/Content/Site.css",
                       "~/Content/DataTables/css/jquery.dataTables.css",
                       "~/Content/DataTables/css/responsive.dataTables.css",
-                       "~/Content/sweetalert.css"
+                       "~/Content/sweetalert.css",
+                       "~/Content/themes/base/jquery-ui.css",
+                       "~/Content/EstilosPropios.css"
+
                       ));
         }
     }
