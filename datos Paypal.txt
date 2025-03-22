@@ -1,0 +1,19 @@
+sb-zoigc39042060@personal.example.com
+p70I_dIM
+
+sb-b3u3n29834911@business.example.com
+vlM1+nu,
+
+https://sandbox.paypal.com
+
+CLIENT ID:
+ASUruccXpSNWa9cIyzNTbCobt737nfh7J7vx8YRcoiewnYt0qj62Kf2JUZJqJO1tXgDNT26SpGFb4Zq5
+
+SECRET KEY 1:
+EOwfpZ-vlznqo46Gu82kDsm59I3RNS0DA13niUw0l8YReqkmClza7Q7Y5zQ_kv1heCsuxcA3m7be9GBp
+
+
+Generated credit card details
+Card number 4032038781504091
+Expiry date 05/2028
+CVC code 259

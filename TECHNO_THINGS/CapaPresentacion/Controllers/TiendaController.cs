@@ -17,6 +17,7 @@ using DocumentFormat.OpenXml.Math;
 
 namespace CapaPresentacionTienda.Controllers
 {
+
     public class TiendaController : Controller
     {
         // GET: Tienda
@@ -202,7 +203,7 @@ namespace CapaPresentacionTienda.Controllers
             decimal total = 0;
 
             DataTable detalle_venta = new DataTable();
-            detalle_venta.Locale = new CultureInfo("es-AR");
+            detalle_venta.Locale = CultureInfo.InvariantCulture;
             detalle_venta.Columns.Add("IdProducto", typeof(string));
             detalle_venta.Columns.Add("Cantidad", typeof(int));
             detalle_venta.Columns.Add("Total", typeof(decimal));
@@ -223,7 +224,7 @@ namespace CapaPresentacionTienda.Controllers
                     unit_amount = new UnitAmount()
                     {
                         currency_code = "USD",
-                        value = oCarrito.oProducto.Precio.ToString("G", new CultureInfo("es-AR"))
+                        value = oCarrito.oProducto.Precio.ToString("G", CultureInfo.InvariantCulture)
                     }
                 });
 
@@ -240,17 +241,17 @@ namespace CapaPresentacionTienda.Controllers
                 amount = new Amount()
                 {
                     currency_code = "USD",
-                    value = total.ToString("G", new CultureInfo("es-AR")),
+                    value = total.ToString("G", CultureInfo.InvariantCulture),
                     breakdown = new Breakdown()
                     {
                         item_total = new ItemTotal()
                         {
                             currency_code = "USD",
-                            value = total.ToString("G", new CultureInfo("es-AR"))
+                            value = total.ToString("G", CultureInfo.InvariantCulture)
                         }
                     }
                 },
-                description = "compra de artículo de Mi Tienda",
+                description = "compra de artículo de Techno Things",
                 items = oListaItem
             };
 
@@ -260,11 +261,11 @@ namespace CapaPresentacionTienda.Controllers
                 purchase_units = new List<PurchaseUnit>() { purchaseUnit },
                 application_context = new ApplicationContext()
                 {
-                    brand_name = "MiTienda.com",
+                    brand_name = "Techno Things",
                     landing_page = "NO_PREFERENCE",
                     user_action = "PAY_NOW",
-                    return_url = "https://localhost:44315/Tienda/PagoEfectuado",
-                    cancel_url = "https://localhost:44315/Tienda/Carrito"    //url en caso de que el cliente cancele la operacion
+                    return_url = "https://localhost:44340/Tienda/PagoEfectuado", //paypal adjunta un token a esta url que luego utilizamos en PagoEfectuado()
+                    cancel_url = "https://localhost:44340/Tienda/Carrito"    //url en caso de que el cliente cancele la operacion
                 }
             };
 
@@ -275,6 +276,8 @@ namespace CapaPresentacionTienda.Controllers
             TempData["DetalleVenta"] = detalle_venta;
 
 
+            
+            //ejecutar servicios de Paypal
             CN_Paypal opaypal = new CN_Paypal();
             Response_Paypal<Response_Checkout> response_paypal = new Response_Paypal<Response_Checkout>();
             //recibir la respuesta de nuestro método de crear solicitud

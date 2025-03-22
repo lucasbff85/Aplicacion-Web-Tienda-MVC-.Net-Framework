@@ -43,14 +43,15 @@ namespace CapaNegocio
                                                                        //
                 if (response.IsSuccessStatusCode)
                 {
-                    string jsonRespuesta = response.Content.ReadAsStringAsync().Result; //obtenemos la respuesta
+                    string jsonRespuesta = response.Content.ReadAsStringAsync().Result; //obtenemos la respuesta como string
 
+                    //convertimos ese string en un Response_Checkout
                     Response_Checkout checkout = JsonConvert.DeserializeObject<Response_Checkout>(jsonRespuesta);
 
                     //ahora nuestro response de paypal va a obtener todo el objeto
                     response_paypal.Response = checkout;
                 }
-                return response_paypal;
+                return response_paypal; //con esto creamos la solicitud de pago dentro de los servicios de Paypal
             }
         }
 
@@ -68,7 +69,7 @@ namespace CapaNegocio
                 var authToken = Encoding.ASCII.GetBytes($"{clientId}:{secret}");
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(authToken));
 
-
+                //envio json vacio "{}"
                 var data = new StringContent("{}", Encoding.UTF8, "application/json"); //enviamos un json vacio "{}"
 
                 //obtener la respuesta de la ejecución de la api

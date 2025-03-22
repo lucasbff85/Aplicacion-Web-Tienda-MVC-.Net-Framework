@@ -3,32 +3,16 @@
   "WorkspaceRootPath": "D:\\PROGRAMACION\\.NET\\TECHNO_THINGS_LB\\TECHNO_THINGS\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{239CB968-F1ED-41B5-9E48-A537BD349A15}|CapaPresentacion\\CapaPresentacion.csproj|d:\\programacion\\.net\\techno_things_lb\\techno_things\\capapresentacion\\views\\shared\\vistacliente.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{239CB968-F1ED-41B5-9E48-A537BD349A15}|CapaPresentacion\\CapaPresentacion.csproj|solutionrelative:capapresentacion\\views\\shared\\vistacliente.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{239CB968-F1ED-41B5-9E48-A537BD349A15}|CapaPresentacion\\CapaPresentacion.csproj|d:\\programacion\\.net\\techno_things_lb\\techno_things\\capapresentacion\\views\\acceso\\cambiarclave.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{239CB968-F1ED-41B5-9E48-A537BD349A15}|CapaPresentacion\\CapaPresentacion.csproj|solutionrelative:capapresentacion\\views\\acceso\\cambiarclave.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{239CB968-F1ED-41B5-9E48-A537BD349A15}|CapaPresentacion\\CapaPresentacion.csproj|d:\\programacion\\.net\\techno_things_lb\\techno_things\\capapresentacion\\views\\tienda\\carrito.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{239CB968-F1ED-41B5-9E48-A537BD349A15}|CapaPresentacion\\CapaPresentacion.csproj|solutionrelative:capapresentacion\\views\\tienda\\carrito.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{239CB968-F1ED-41B5-9E48-A537BD349A15}|CapaPresentacion\\CapaPresentacion.csproj|d:\\programacion\\.net\\techno_things_lb\\techno_things\\capapresentacion\\views\\editor\\producto.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{239CB968-F1ED-41B5-9E48-A537BD349A15}|CapaPresentacion\\CapaPresentacion.csproj|solutionrelative:capapresentacion\\views\\editor\\producto.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{239CB968-F1ED-41B5-9E48-A537BD349A15}|CapaPresentacion\\CapaPresentacion.csproj|D:\\PROGRAMACION\\.NET\\TECHNO_THINGS_LB\\TECHNO_THINGS\\capapresentacion\\app_start\\routeconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{239CB968-F1ED-41B5-9E48-A537BD349A15}|CapaPresentacion\\CapaPresentacion.csproj|solutionrelative:capapresentacion\\app_start\\routeconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{239CB968-F1ED-41B5-9E48-A537BD349A15}|CapaPresentacion\\CapaPresentacion.csproj|d:\\programacion\\.net\\techno_things_lb\\techno_things\\capapresentacion\\views\\tienda\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{239CB968-F1ED-41B5-9E48-A537BD349A15}|CapaPresentacion\\CapaPresentacion.csproj|solutionrelative:capapresentacion\\views\\tienda\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4F029E99-B502-4BDA-B1A9-9E892775BBD0}|CapaDatos\\CapaDatos.csproj|d:\\programacion\\.net\\techno_things_lb\\techno_things\\capadatos\\cd_ubicacion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4F029E99-B502-4BDA-B1A9-9E892775BBD0}|CapaDatos\\CapaDatos.csproj|solutionrelative:capadatos\\cd_ubicacion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8AC05D7C-83D9-4A68-A067-38FE4D48516A}|CapaNegocio\\CapaNegocio.csproj|d:\\programacion\\.net\\techno_things_lb\\techno_things\\capanegocio\\cn_ubicacion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8AC05D7C-83D9-4A68-A067-38FE4D48516A}|CapaNegocio\\CapaNegocio.csproj|solutionrelative:capanegocio\\cn_ubicacion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{239CB968-F1ED-41B5-9E48-A537BD349A15}|CapaPresentacion\\CapaPresentacion.csproj|d:\\programacion\\.net\\techno_things_lb\\techno_things\\capapresentacion\\controllers\\tiendacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{239CB968-F1ED-41B5-9E48-A537BD349A15}|CapaPresentacion\\CapaPresentacion.csproj|solutionrelative:capapresentacion\\controllers\\tiendacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{239CB968-F1ED-41B5-9E48-A537BD349A15}|CapaPresentacion\\CapaPresentacion.csproj|d:\\programacion\\.net\\techno_things_lb\\techno_things\\capapresentacion\\views\\editor\\marca.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{239CB968-F1ED-41B5-9E48-A537BD349A15}|CapaPresentacion\\CapaPresentacion.csproj|solutionrelative:capapresentacion\\views\\editor\\marca.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -43,92 +27,40 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "VistaCliente.cshtml",
-              "DocumentMoniker": "D:\\PROGRAMACION\\.NET\\TECHNO_THINGS_LB\\TECHNO_THINGS\\CapaPresentacion\\Views\\Shared\\VistaCliente.cshtml",
-              "RelativeDocumentMoniker": "CapaPresentacion\\Views\\Shared\\VistaCliente.cshtml",
-              "ToolTip": "D:\\PROGRAMACION\\.NET\\TECHNO_THINGS_LB\\TECHNO_THINGS\\CapaPresentacion\\Views\\Shared\\VistaCliente.cshtml",
-              "RelativeToolTip": "CapaPresentacion\\Views\\Shared\\VistaCliente.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADcAAAAAAAAAAAAAAA==",
+              "Title": "CambiarClave.cshtml",
+              "DocumentMoniker": "D:\\PROGRAMACION\\.NET\\TECHNO_THINGS_LB\\TECHNO_THINGS\\CapaPresentacion\\Views\\Acceso\\CambiarClave.cshtml",
+              "RelativeDocumentMoniker": "CapaPresentacion\\Views\\Acceso\\CambiarClave.cshtml",
+              "ToolTip": "D:\\PROGRAMACION\\.NET\\TECHNO_THINGS_LB\\TECHNO_THINGS\\CapaPresentacion\\Views\\Acceso\\CambiarClave.cshtml",
+              "RelativeToolTip": "CapaPresentacion\\Views\\Acceso\\CambiarClave.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-21T14:34:28.979Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\PROGRAMACION\\.NET\\TECHNO_THINGS_LB\\TECHNO_THINGS\\CapaPresentacion\\Views\\Tienda\\Index.cshtml",
-              "RelativeDocumentMoniker": "CapaPresentacion\\Views\\Tienda\\Index.cshtml",
-              "ToolTip": "D:\\PROGRAMACION\\.NET\\TECHNO_THINGS_LB\\TECHNO_THINGS\\CapaPresentacion\\Views\\Tienda\\Index.cshtml",
-              "RelativeToolTip": "CapaPresentacion\\Views\\Tienda\\Index.cshtml",
-              "ViewState": "AgIAAMYAAAAAAAAAAAAAAMwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-21T14:16:33.991Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "CD_Ubicacion.cs",
-              "DocumentMoniker": "D:\\PROGRAMACION\\.NET\\TECHNO_THINGS_LB\\TECHNO_THINGS\\CapaDatos\\CD_Ubicacion.cs",
-              "RelativeDocumentMoniker": "CapaDatos\\CD_Ubicacion.cs",
-              "ToolTip": "D:\\PROGRAMACION\\.NET\\TECHNO_THINGS_LB\\TECHNO_THINGS\\CapaDatos\\CD_Ubicacion.cs",
-              "RelativeToolTip": "CapaDatos\\CD_Ubicacion.cs",
-              "ViewState": "AgIAACEBAAAAAAAAAAAswCkBAAAdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-21T13:23:48.959Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "CN_Ubicacion.cs",
-              "DocumentMoniker": "D:\\PROGRAMACION\\.NET\\TECHNO_THINGS_LB\\TECHNO_THINGS\\CapaNegocio\\CN_Ubicacion.cs",
-              "RelativeDocumentMoniker": "CapaNegocio\\CN_Ubicacion.cs",
-              "ToolTip": "D:\\PROGRAMACION\\.NET\\TECHNO_THINGS_LB\\TECHNO_THINGS\\CapaNegocio\\CN_Ubicacion.cs",
-              "RelativeToolTip": "CapaNegocio\\CN_Ubicacion.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAYwBoAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-21T13:22:33.665Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "TiendaController.cs",
-              "DocumentMoniker": "D:\\PROGRAMACION\\.NET\\TECHNO_THINGS_LB\\TECHNO_THINGS\\CapaPresentacion\\Controllers\\TiendaController.cs",
-              "RelativeDocumentMoniker": "CapaPresentacion\\Controllers\\TiendaController.cs",
-              "ToolTip": "D:\\PROGRAMACION\\.NET\\TECHNO_THINGS_LB\\TECHNO_THINGS\\CapaPresentacion\\Controllers\\TiendaController.cs",
-              "RelativeToolTip": "CapaPresentacion\\Controllers\\TiendaController.cs",
-              "ViewState": "AgIAAJsAAAAAAAAAAAAWwLcAAAA7AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-21T12:11:44.909Z",
+              "WhenOpened": "2025-03-22T19:16:50.286Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Carrito.cshtml",
-              "DocumentMoniker": "D:\\PROGRAMACION\\.NET\\TECHNO_THINGS_LB\\TECHNO_THINGS\\CapaPresentacion\\Views\\Tienda\\Carrito.cshtml",
-              "RelativeDocumentMoniker": "CapaPresentacion\\Views\\Tienda\\Carrito.cshtml",
-              "ToolTip": "D:\\PROGRAMACION\\.NET\\TECHNO_THINGS_LB\\TECHNO_THINGS\\CapaPresentacion\\Views\\Tienda\\Carrito.cshtml",
-              "RelativeToolTip": "CapaPresentacion\\Views\\Tienda\\Carrito.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQBAAAAAAAAAAAAAA==",
+              "Title": "Producto.cshtml",
+              "DocumentMoniker": "D:\\PROGRAMACION\\.NET\\TECHNO_THINGS_LB\\TECHNO_THINGS\\CapaPresentacion\\Views\\Editor\\Producto.cshtml",
+              "RelativeDocumentMoniker": "CapaPresentacion\\Views\\Editor\\Producto.cshtml",
+              "ToolTip": "D:\\PROGRAMACION\\.NET\\TECHNO_THINGS_LB\\TECHNO_THINGS\\CapaPresentacion\\Views\\Editor\\Producto.cshtml",
+              "RelativeToolTip": "CapaPresentacion\\Views\\Editor\\Producto.cshtml",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAAB0AAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-21T12:10:12.02Z",
+              "WhenOpened": "2025-03-22T19:15:15.703Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "RouteConfig.cs",
-              "DocumentMoniker": "D:\\PROGRAMACION\\.NET\\TECHNO_THINGS_LB\\TECHNO_THINGS\\CapaPresentacion\\App_Start\\RouteConfig.cs",
-              "RelativeDocumentMoniker": "CapaPresentacion\\App_Start\\RouteConfig.cs",
-              "ToolTip": "D:\\PROGRAMACION\\.NET\\TECHNO_THINGS_LB\\TECHNO_THINGS\\CapaPresentacion\\App_Start\\RouteConfig.cs",
-              "RelativeToolTip": "CapaPresentacion\\App_Start\\RouteConfig.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-17T04:34:25.548Z",
+              "Title": "Marca.cshtml",
+              "DocumentMoniker": "D:\\PROGRAMACION\\.NET\\TECHNO_THINGS_LB\\TECHNO_THINGS\\CapaPresentacion\\Views\\Editor\\Marca.cshtml",
+              "RelativeDocumentMoniker": "CapaPresentacion\\Views\\Editor\\Marca.cshtml",
+              "ToolTip": "D:\\PROGRAMACION\\.NET\\TECHNO_THINGS_LB\\TECHNO_THINGS\\CapaPresentacion\\Views\\Editor\\Marca.cshtml",
+              "RelativeToolTip": "CapaPresentacion\\Views\\Editor\\Marca.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-22T19:14:45.576Z",
               "EditorCaption": ""
             }
           ]

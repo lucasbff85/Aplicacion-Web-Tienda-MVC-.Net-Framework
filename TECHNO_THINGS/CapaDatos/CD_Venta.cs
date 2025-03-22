@@ -23,7 +23,7 @@ namespace CapaDatos
                 {
                     SqlCommand cmd = new SqlCommand("usp_RegistrarVenta", oconexion);
                     cmd.Parameters.AddWithValue("IdUsuario", obj.IdUsuario);
-                    cmd.Parameters.AddWithValue("CantidadProducto", obj.TotalProducto);
+                    cmd.Parameters.AddWithValue("TotalProducto", obj.TotalProducto);
                     cmd.Parameters.AddWithValue("MontoTotal", obj.MontoTotal);
                     cmd.Parameters.AddWithValue("Contacto", obj.Contacto);
                     cmd.Parameters.AddWithValue("IdCiudad", obj.IdCiudad);

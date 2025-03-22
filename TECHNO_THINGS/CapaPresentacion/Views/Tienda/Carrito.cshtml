@@ -379,7 +379,7 @@
                 return
             }
 
-            if ($("#cbodistrito").val() == null || $("#txtnombrecontacto").val() == "" || $("#txtdireccion").val() == "" || $("#txttelefono").val() == "") {
+            if ($("#cbociudad").val() == null || $("#txtnombrecontacto").val() == "" || $("#txtdireccion").val() == "" || $("#txttelefono").val() == "") {
                 swal("", "Debe completar los datos del envío", "warning");
                 return
             }
@@ -389,13 +389,13 @@
                 TotalProducto: $("input.input-cantidad").length,
                 MontoTotal: 0,
                 Contacto: $("#txtnombrecontacto").val(),
-                IdDistrito: $("#cbodistrito").val(),
+                IdCiudad: parseInt($("#cbociudad").val()),
                 Telefono: $("#txttelefono").val(),
                 Direccion: $("#txtdireccion").val()
             }
 
             var lista_carrito = [];
-            // VER SI LLEVA EL #
+            // CON CLASES
             $("input.input-cantidad").each(function (i) {
                 var producto = $(this).data("oProducto");
                 var cantidad = parseFloat($(this).val());

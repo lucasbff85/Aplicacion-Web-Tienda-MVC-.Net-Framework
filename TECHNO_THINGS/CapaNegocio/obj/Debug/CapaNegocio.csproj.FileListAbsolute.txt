@@ -11,3 +11,5 @@ D:\PROGRAMACION\.NET\TECHNO_THINGS_LB\TECHNO_THINGS\CapaNegocio\obj\Debug\CapaNe
 D:\PROGRAMACION\.NET\TECHNO_THINGS_LB\TECHNO_THINGS\CapaNegocio\obj\Debug\CapaNego.81B9D119.Up2Date
 D:\PROGRAMACION\.NET\TECHNO_THINGS_LB\TECHNO_THINGS\CapaNegocio\obj\Debug\CapaNegocio.dll
 D:\PROGRAMACION\.NET\TECHNO_THINGS_LB\TECHNO_THINGS\CapaNegocio\obj\Debug\CapaNegocio.pdb
+D:\PROGRAMACION\.NET\TECHNO_THINGS_LB\TECHNO_THINGS\CapaNegocio\bin\Debug\System.Configuration.ConfigurationManager.dll
+D:\PROGRAMACION\.NET\TECHNO_THINGS_LB\TECHNO_THINGS\CapaNegocio\bin\Debug\System.Configuration.ConfigurationManager.xml

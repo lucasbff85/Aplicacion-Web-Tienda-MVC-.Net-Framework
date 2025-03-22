@@ -17,7 +17,7 @@ namespace CapaEntidad
 
         public string Contacto { get; set; }
 
-        public string IdCiudad { get; set; }
+        public int IdCiudad { get; set; }
 
         public string Telefono { get; set; }
 
